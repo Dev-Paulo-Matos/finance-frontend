@@ -1,0 +1,79 @@
+.body-all {
+    background-color: #dee0e2;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    gap: 15px; // Cria o espaçamento entre os blocos
+    box-sizing: border-box;
+    grid-template-areas:
+        "head head"
+        "navbar main";
+
+    grid-template-rows: 70px 1fr;
+    grid-template-columns: 80px 1fr;
+   
+  header {
+    grid-area: head;
+    background-color: rgb(245, 245, 245); // Um pouco mais claro que o nav
+    display: flex;
+    justify-content: space-between; // Título na esquerda, botões na direita
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #1e293b;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+  }
+
+  nav {
+    grid-area: navbar;
+    background-color: rgb(235, 235, 235);
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centraliza os ícones na largura de 80px
+    padding: 20px 0;
+    gap: 20px;
+    border-radius: 12px;
+
+    button {
+      color: #64748b; // Cor suave para ícones inativos
+      &:hover { color: #2563eb; }
+    }
+  }
+
+  main {
+    grid-area: main;
+    background-color: white; // Main branco para destacar o conteúdo
+    padding: 25px;
+    border-radius: 12px;
+    overflow-y: auto;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+  }
+
+   &.not-logged {
+        grid-template-areas:
+        "main main"
+        "main main"; // Main ocupa tudo agora
+        grid-template-columns: 1fr; // Remove a coluna de 80px
+        nav {
+            display: none;
+        }
+        header {
+            display: none;
+        }
+    }
+}
