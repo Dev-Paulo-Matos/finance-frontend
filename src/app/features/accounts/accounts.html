@@ -1,0 +1,43 @@
+<div class="accounts-wrapper">
+  <header class="page-header">
+    <div class="summary">
+      <span class="label">Patrimônio Total</span>
+      <h1>{{ getTotalBalance() | currency:'BRL' }}</h1>
+    </div>
+    <button mat-raised-button color="primary" class="add-btn">
+      <mat-icon>add</mat-icon> Conectar Conta
+    </button>
+  </header>
+
+  <div class="accounts-grid">
+    <div class="account-card card" *ngFor="let acc of accounts">
+      <div class="card-header">
+        <div class="bank-info">
+          <div class="bank-logo" [style.background-color]="acc.color">
+            <mat-icon>{{ acc.icon }}</mat-icon>
+          </div>
+          <div>
+            <h3>{{ acc.bank }}</h3>
+            <span class="type">{{ acc.type }}</span>
+          </div>
+        </div>
+        <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+      </div>
+
+      <div class="card-body">
+        <span class="label">Saldo Disponível</span>
+        <h2 class="balance">{{ acc.balance | currency:'BRL' }}</h2>
+      </div>
+
+      <div class="card-footer">
+        <button mat-button class="view-btn">Ver Extrato</button>
+        <mat-icon class="arrow">chevron_right</mat-icon>
+      </div>
+    </div>
+
+    <div class="add-account-card">
+      <mat-icon>add_circle_outline</mat-icon>
+      <span>Adicionar Nova Conta</span>
+    </div>
+  </div>
+</div>

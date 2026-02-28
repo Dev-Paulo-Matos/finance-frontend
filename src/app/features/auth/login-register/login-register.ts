@@ -16,8 +16,8 @@ import { CommonModule } from "@angular/common";
 })
 export class LoginRegisterComponent {
   public isRegisterMode = false; // Controla a animação
-  loginForm: FormGroup;
-  registerForm: FormGroup;
+  public loginForm: FormGroup;
+  public registerForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
@@ -25,18 +25,47 @@ export class LoginRegisterComponent {
       password: ['', [Validators.required]]
     });
 
+    // Ajustado para bater com a Interface RegisterType
     this.registerForm = this.fb.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      phone: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  toggleMode() {
-    this.isRegisterMode = !this.isRegisterMode;
+  public onSubmit(): void {
+    if (this.isRegisterMode) {
+      this.configureRegisterMode();
+      return;
+    }
+    this.configureLoginMode();
+
   }
 
-  onSubmit() {
-    // Sua lógica de login atual
+  private configureLoginMode(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => this.router.navigate(['/dashboard']),
+      error: (err) => console.error(err)
+    });
+  }
+
+  private configureRegisterMode(): void {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+    this.authService.register(this.registerForm.value).subscribe({
+      next: (res) => this.router.navigate(['/dashboard']),
+      error: (err) => console.error(err)
+    });
+  }
+
+  public toggleMode() {
+    this.isRegisterMode = !this.isRegisterMode;
   }
 }

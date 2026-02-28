@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -16,10 +17,20 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
-export class Layout {
+export class Layout implements OnInit {
   public isLoggedIn = false;
 
-  public logout() {
-    this.isLoggedIn = false;
+  constructor(private readonly AuthService: AuthService) {
+
+  }
+
+  public ngOnInit(): void {
+      this.AuthService.isLoggedIn$.subscribe(value => {
+        this.isLoggedIn = value
+      })
+  }
+
+  public logout(): void {
+    this.AuthService.logout();
   }
 }

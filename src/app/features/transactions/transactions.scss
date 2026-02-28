@@ -1,0 +1,87 @@
+.transactions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 { font-size: 24px; margin: 0; font-weight: 800; }
+    p { color: #8e9297; margin: 5px 0 0; font-size: 14px; }
+
+    .add-btn {
+      border-radius: 12px;
+      padding: 0 20px;
+      height: 45px;
+      background-color: #5c67ff;
+    }
+  }
+}
+
+.table-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+
+  .filter-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fcfdfe;
+    border-bottom: 1px solid #f0f2f5;
+
+    mat-icon { color: #8e9297; }
+    input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      color: #333;
+    }
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #8e9297;
+      padding: 15px;
+    }
+
+    td {
+      padding: 15px;
+      font-size: 14px;
+      border-bottom: 1px solid #f8f9fa;
+    }
+  }
+
+  .cat-badge {
+    background: #f0f2ff;
+    color: #5c67ff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .text-red { color: #ff5c8a; font-weight: 600; }
+  .text-green { color: #2ecc71; font-weight: 600; }
+
+  .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    &.completed { background: #2ecc71; }
+    &.pending { background: #f1c40f; }
+  }
+}

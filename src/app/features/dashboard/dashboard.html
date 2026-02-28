@@ -1,0 +1,73 @@
+<div class="dashboard-wrapper">
+  <header class="welcome-header">
+    <h1>Hi, <span>{{ userName }}</span></h1>
+    <p>Gerencie suas finanças selecionando uma categoria abaixo.</p>
+  </header>
+
+  <div class="stats-grid">
+    <div class="selectable-card" [class.active]="activeTab === 'contas'" (click)="setTab('contas')">
+      <div class="icon-circle shadow-blue">
+        <mat-icon>account_balance</mat-icon>
+      </div>
+      <div class="info">
+        <span class="label">Minhas Contas</span>
+        <h2 class="value">03</h2>
+      </div>
+    </div>
+
+    <div class="selectable-card" [class.active]="activeTab === 'transacoes'" (click)="setTab('transacoes')">
+      <div class="icon-circle shadow-pink">
+        <mat-icon>swap_horiz</mat-icon>
+      </div>
+      <div class="info">
+        <span class="label">Transações</span>
+        <h2 class="value">150</h2>
+      </div>
+    </div>
+
+    <div class="selectable-card" [class.active]="activeTab === 'categorias'" (click)="setTab('categorias')">
+      <div class="icon-circle shadow-yellow">
+        <mat-icon>category</mat-icon>
+      </div>
+      <div class="info">
+        <span class="label">Categorias</span>
+        <h2 class="value">12</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container card">
+    <div class="table-header">
+        <div class="config-list-header">
+            <h3>Lista de {{ activeTab | titlecase }}</h3>
+            <p>Ultimos 5 registros</p>
+        </div>
+      <button mat-flat-button color="primary">
+        <mat-icon>add</mat-icon> Novo
+      </button>
+    </div>
+
+    <div class="content-area">
+      <table *ngIf="activeTab === 'contas'">
+        <thead><tr><th>Banco</th><th>Tipo</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let c of contas"><td>{{c.banco}}</td><td>{{c.tipo}}</td><td>{{c.saldo | currency}}</td></tr>
+        </tbody>
+      </table>
+
+      <table *ngIf="activeTab === 'transacoes'">
+        <thead><tr><th>Data</th><th>Descrição</th><th>Valor</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let t of transacoes"><td>{{t.data}}</td><td>{{t.desc}}</td><td [style.color]="t.valor < 0 ? 'red' : 'green'">{{t.valor | currency}}</td></tr>
+        </tbody>
+      </table>
+
+      <table *ngIf="activeTab === 'categorias'">
+        <thead><tr><th>Categoria</th><th>Limite</th><th>Gasto Atual</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let cat of categorias"><td>{{cat.nome}}</td><td>{{cat.limite | currency}}</td><td>{{cat.gasto | currency}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

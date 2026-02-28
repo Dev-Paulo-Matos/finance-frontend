@@ -1,0 +1,89 @@
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+// Grid de Cards Superiores
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  .selectable-card {
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+
+    &:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+
+    &.active {
+      border-color: #5c67ff;
+      background: #f0f2ff;
+      .value { color: #5c67ff; }
+    }
+
+    .info {
+      .label { color: #8e9297; font-size: 14px; }
+      .value { margin: 0; font-size: 24px; font-weight: 700; }
+    }
+  }
+}
+
+// Container da Tabela
+.table-container {
+  background: white;
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    h3 { margin: 0; font-size: 20px; color: #1a1a1a; }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    th {
+      text-align: left;
+      padding: 15px;
+      color: #8e9297;
+      font-weight: 500;
+      border-bottom: 1px solid #f0f2f5;
+    }
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid #f8f9fa;
+      color: #333;
+    }
+
+    tr:hover td { background-color: #fcfdfe; }
+  }
+}
+
+// Cores dos ícones (reutilizando seus estilos)
+.icon-circle {
+  width: 50px; height: 50px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.shadow-blue { background: #eef0ff; color: #5c67ff; }
+.shadow-pink { background: #fff0f3; color: #ff5c8a; }
+.shadow-yellow { background: #fff9e6; color: #ffbc02; }
+
+.config-list-header {
+    display: flex;
+    flex-direction: column;
+}

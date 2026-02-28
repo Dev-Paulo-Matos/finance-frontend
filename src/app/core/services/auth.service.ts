@@ -2,23 +2,47 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthResponse } from '../models/auth.model';
+import { environment } from '../../../environments/environment';
+
+interface LoginType {
+  email: string;
+  password: string;
+}
+
+interface RegisterType {
+  userName: string;
+  name: string;
+  email: string;
+  password: string;
+  passCode: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:8080/api/auth';
-  // O BehaviorSubject mantém o estado do usuário logado durante a sessão
   private userSubject = new BehaviorSubject<boolean>(this.hasToken());
 
-  constructor(private http: HttpClient) {}
+  private baseUrl = `${environment.apiUrl}/auth`
 
-  login(credentials: any): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.API_URL}/login`, credentials).pipe(
+  constructor(private http: HttpClient) { }
+
+  public login(credentials: LoginType): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, credentials).pipe(
       tap(res => {
         localStorage.setItem('token', res.token);
         this.userSubject.next(true);
       })
     );
   }
+
+  public register(credentials: RegisterType): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/register`, credentials).pipe(
+      tap(res => {
+        localStorage.setItem('token', res.token);
+        this.userSubject.next(true);
+      })
+    );
+  }
+
 
   logout() {
     localStorage.removeItem('token');

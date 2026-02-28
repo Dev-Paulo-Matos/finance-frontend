@@ -6,33 +6,35 @@
     </div>
 
     <div class="actions">
-      <button mat-icon-button title="Pesquisar">
-        <mat-icon>search</mat-icon>
-      </button>
-
       @if (isLoggedIn) {
-        <button mat-icon-button title="Meu Perfil">
-          <mat-icon>account_circle</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="logout()" title="Sair">
-          <mat-icon>logout</mat-icon>
-        </button>
+      <button mat-icon-button title="Meu Perfil">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="logout()" title="Sair">
+        <mat-icon>logout</mat-icon>
+      </button>
       } @else {
-        <button mat-button routerLink="/login">LOGIN</button>
-        <button mat-raised-button color="primary" routerLink="/register">CADASTRAR</button>
+      <button mat-button routerLink="/login">LOGIN</button>
+      <button mat-raised-button color="primary" routerLink="/register">CADASTRAR</button>
       }
     </div>
   </header>
 
   <nav>
-    <button mat-icon-button routerLink="/dashboard" routerLinkActive="active" title="Dashboard">
-      <mat-icon>dashboard</mat-icon>
+    <button mat-icon-button routerLink="/dashboard" routerLinkActive="active-nav"
+      [routerLinkActiveOptions]="{exact: true}" title="Dashboard">
+      <mat-icon>grid_view</mat-icon> </button>
+
+    <button mat-icon-button routerLink="/accounts" routerLinkActive="active-nav" title="Contas">
+      <mat-icon>account_balance</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/transactions" routerLinkActive="active" title="Transações">
+
+    <button mat-icon-button routerLink="/transactions" routerLinkActive="active-nav" title="Transações">
       <mat-icon>swap_horiz</mat-icon>
     </button>
-    <button mat-icon-button routerLink="/reports" routerLinkActive="active" title="Relatórios">
-      <mat-icon>bar_chart</mat-icon>
+
+    <button mat-icon-button routerLink="/categories" routerLinkActive="active-nav" title="Categorias">
+      <mat-icon>category</mat-icon>
     </button>
   </nav>
 
