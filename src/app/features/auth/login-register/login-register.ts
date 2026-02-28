@@ -1,8 +1,12 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { AuthService } from "../../../core/services/auth.service";
-import { Router } from "@angular/router";
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+
+// Imports Corretos do Angular Material
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: 'app-login-register',
@@ -11,22 +15,27 @@ import { CommonModule } from "@angular/common";
   templateUrl: 'login-register.html',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule, // Importe o módulo completo para garantir as diretivas
+    MatInputModule      // Essencial para o matInput funcionar
   ]
 })
 export class LoginRegisterComponent {
-  public isRegisterMode = false; // Controla a animação
+  public isRegisterMode = false;
   public loginForm: FormGroup;
   public registerForm: FormGroup;
-  public errorMessage: string | null = null; // Armazena erro da API
+  public errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService, 
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
 
-    // Ajustado para bater com a Interface RegisterType
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -34,15 +43,9 @@ export class LoginRegisterComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  
 
   public onSubmit(): void {
-    if (this.isRegisterMode) {
-      this.configureRegisterMode();
-      return;
-    }
-    this.configureLoginMode();
-
+    this.isRegisterMode ? this.configureRegisterMode() : this.configureLoginMode();
   }
 
   private configureLoginMode(): void {
@@ -50,13 +53,10 @@ export class LoginRegisterComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
-    this.errorMessage = null; // Limpa erro anterior
+    this.errorMessage = null;
     this.authService.login(this.loginForm.value).subscribe({
-      next: (res) => this.router.navigate(['/dashboard']),
-      error: (err) => {
-        // Trata erro do Java (ex: 401 Unauthorized)
-        this.errorMessage = "Email ou senha inválidos. Tente novamente.";
-      }
+      next: () => this.router.navigate(['/dashboard']),
+      error: () => this.errorMessage = "Email ou senha inválidos."
     });
   }
 
@@ -67,14 +67,13 @@ export class LoginRegisterComponent {
     }
     this.errorMessage = null;
     this.authService.register(this.registerForm.value).subscribe({
-      next: (res) => this.router.navigate(['/dashboard']),
-      error: (err) => {
-        this.errorMessage = "Erro ao cadastrar. O e-mail já pode estar em uso.";
-      }
+      next: () => this.router.navigate(['/dashboard']),
+      error: () => this.errorMessage = "Erro ao cadastrar. Verifique os dados."
     });
   }
 
-  public toggleMode() {
+  public toggleMode(): void {
     this.isRegisterMode = !this.isRegisterMode;
+    this.errorMessage = null; // Limpa o erro ao trocar de tela
   }
 }
