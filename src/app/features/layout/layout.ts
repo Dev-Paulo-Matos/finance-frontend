@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { LoadingService } from '../../core/services/loading.service';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-layout',
@@ -12,7 +14,8 @@ import { AuthService } from '../../core/services/auth.service';
     MatIconModule, 
     MatButtonModule, 
     RouterLink, 
-    RouterLinkActive
+    RouterLinkActive,
+    MatSpinner
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
@@ -20,8 +23,8 @@ import { AuthService } from '../../core/services/auth.service';
 export class Layout implements OnInit {
   public isLoggedIn = false;
 
-  constructor(private readonly AuthService: AuthService) {
 
+  constructor(private readonly AuthService: AuthService, private readonly router: Router, public readonly loadingService: LoadingService) {
   }
 
   public ngOnInit(): void {
@@ -32,5 +35,7 @@ export class Layout implements OnInit {
 
   public logout(): void {
     this.AuthService.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['login'])
   }
 }

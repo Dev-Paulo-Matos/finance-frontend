@@ -18,6 +18,7 @@ export class LoginRegisterComponent {
   public isRegisterMode = false; // Controla a animação
   public loginForm: FormGroup;
   public registerForm: FormGroup;
+  public errorMessage: string | null = null; // Armazena erro da API
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
@@ -33,6 +34,7 @@ export class LoginRegisterComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
+  
 
   public onSubmit(): void {
     if (this.isRegisterMode) {
@@ -48,9 +50,13 @@ export class LoginRegisterComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
+    this.errorMessage = null; // Limpa erro anterior
     this.authService.login(this.loginForm.value).subscribe({
       next: (res) => this.router.navigate(['/dashboard']),
-      error: (err) => console.error(err)
+      error: (err) => {
+        // Trata erro do Java (ex: 401 Unauthorized)
+        this.errorMessage = "Email ou senha inválidos. Tente novamente.";
+      }
     });
   }
 
@@ -59,9 +65,12 @@ export class LoginRegisterComponent {
       this.registerForm.markAllAsTouched();
       return;
     }
+    this.errorMessage = null;
     this.authService.register(this.registerForm.value).subscribe({
       next: (res) => this.router.navigate(['/dashboard']),
-      error: (err) => console.error(err)
+      error: (err) => {
+        this.errorMessage = "Erro ao cadastrar. O e-mail já pode estar em uso.";
+      }
     });
   }
 
