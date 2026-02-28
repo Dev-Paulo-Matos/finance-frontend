@@ -27,8 +27,8 @@ export class LoginRegisterComponent {
   public errorMessage: string | null = null;
 
   constructor(
-    private fb: FormBuilder, 
-    private authService: AuthService, 
+    private fb: FormBuilder,
+    private authService: AuthService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
@@ -65,10 +65,19 @@ export class LoginRegisterComponent {
       this.registerForm.markAllAsTouched();
       return;
     }
+
     this.errorMessage = null;
     this.authService.register(this.registerForm.value).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
-      error: () => this.errorMessage = "Erro ao cadastrar. Verifique os dados."
+      next: (res) => this.router.navigate(['/dashboard']),
+      error: (err) => {
+        // Se o backend mandar o mapa que criamos acima:
+        if (err.error && err.error.error) {
+          this.errorMessage = err.error.error;
+        } else {
+          this.errorMessage = "Erro interno no servidor. Tente mais tarde.";
+        }
+        console.error('Erro detalhado:', err);
+      }
     });
   }
 
