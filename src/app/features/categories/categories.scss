@@ -71,3 +71,108 @@
     }
   }
 }
+
+
+// No styles.scss global ou no arquivo de estilos do componente se não usar ViewEncapsulation
+::ng-deep .side-modal-container {
+  mat-dialog-container {
+    padding: 0;
+    border-radius: 0;
+  }
+  
+  .mdc-dialog__surface {
+    border-radius: 0 !important;
+    position: absolute;
+    right: 0;
+    height: 100vh;
+  }
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.over-limit {
+  ::ng-deep .mdc-linear-progress__bar-inner {
+    border-color: #e74c3c !important;
+  }
+}
+
+.categories-wrapper {
+  padding: 24px;
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+
+    h1 { margin: 0; font-weight: 700; color: #1a1a1a; }
+    p { margin: 4px 0 0; color: #666; }
+  }
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.category-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+
+  &:hover { transform: translateY(-4px); }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .card-info {
+    h3 { margin: 0; font-size: 1.1rem; color: #333; }
+    .description { font-size: 0.85rem; color: #888; margin: 4px 0 12px; }
+    
+    .values {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
+
+      .spent { font-size: 1.25rem; font-weight: 700; color: #2d3436; }
+      .limit { font-size: 0.85rem; color: #b2bec3; }
+    }
+  }
+
+  .progress-section {
+    .progress-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+}
+
+// Estilo para quando passar do limite
+.over-limit ::ng-deep .mdc-linear-progress__bar-inner {
+  border-color: #e74c3c !important;
+}

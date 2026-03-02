@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectorRef, Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AuthService } from "../../../core/services/auth.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-login-register',
@@ -16,8 +17,8 @@ import { AuthService } from "../../../core/services/auth.service";
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule, // Importe o módulo completo para garantir as diretivas
-    MatInputModule      // Essencial para o matInput funcionar
+    MatFormFieldModule, 
+    MatInputModule
   ]
 })
 export class LoginRegisterComponent {
@@ -29,7 +30,8 @@ export class LoginRegisterComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -56,7 +58,10 @@ export class LoginRegisterComponent {
     this.errorMessage = null;
     this.authService.login(this.loginForm.value).subscribe({
       next: () => this.router.navigate(['/dashboard']),
-      error: () => this.errorMessage = "Email ou senha inválidos."
+      error: () => {
+        this.errorMessage = "Email ou senha inválidos."
+        this.cdr.detectChanges();
+      }
     });
   }
 
@@ -69,13 +74,13 @@ export class LoginRegisterComponent {
     this.errorMessage = null;
     this.authService.register(this.registerForm.value).subscribe({
       next: (res) => this.router.navigate(['/dashboard']),
-      error: (err) => {
-        // Se o backend mandar o mapa que criamos acima:
-        if (err.error && err.error.error) {
-          this.errorMessage = err.error.error;
+      error: (err: HttpErrorResponse) => {
+        if (err.error && err.error?.message) {
+          this.errorMessage = err.error.message;
         } else {
           this.errorMessage = "Erro interno no servidor. Tente mais tarde.";
         }
+        this.cdr.detectChanges();
         console.error('Erro detalhado:', err);
       }
     });

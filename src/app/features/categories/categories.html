@@ -4,37 +4,48 @@
       <h1>Categorias & Orçamentos</h1>
       <p>Defina limites mensais para controlar seus gastos por setor.</p>
     </div>
-    <button mat-raised-button color="primary" class="add-btn">
+    <button mat-raised-button color="primary" (click)="openCategoryForm()">
       <mat-icon>add</mat-icon> Nova Categoria
     </button>
   </header>
 
   <div class="categories-grid">
-    <div class="category-card card" *ngFor="let cat of categories">
+    <div class="category-card" *ngFor="let cat of categories">
       <div class="card-top">
         <div class="icon-box" [style.background-color]="cat.color + '20'" [style.color]="cat.color">
           <mat-icon>{{ cat.icon }}</mat-icon>
         </div>
-        <button mat-icon-button><mat-icon>edit</mat-icon></button>
+        <div class="actions">
+          <button mat-icon-button (click)="openCategoryForm(cat, 'view')" matTooltip="Visualizar">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openCategoryForm(cat, 'edit')" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </div>
 
       <div class="card-info">
         <h3>{{ cat.name }}</h3>
+        <p class="description">{{ cat.desc }}</p>
         <div class="values">
-          <span class="spent">{{ cat.spent | currency:'BRL' }}</span>
-          <span class="limit">de {{ cat.limit | currency:'BRL' }}</span>
+          <span class="spent">{{ cat.spentValue | currency:'BRL' }}</span>
+          <span class="limit">de {{ cat.limitValue | currency:'BRL' }}</span>
         </div>
       </div>
 
       <div class="progress-section">
         <mat-progress-bar 
           mode="determinate" 
-          [value]="calculatePercentage(cat.spent, cat.limit)"
-          [class.over-limit]="cat.spent > cat.limit">
+          [value]="calculatePercentage(cat.spentValue, cat.limitValue)"
+          [class.over-limit]="cat.spentValue > cat.limitValue">
         </mat-progress-bar>
-        <span class="percentage" [style.color]="cat.spent > cat.limit ? '#e74c3c' : '#8e9297'">
-          {{ (cat.spent / cat.limit) | percent }}
-        </span>
+        <div class="progress-footer">
+           <span class="percentage" [style.color]="cat.spentValue > cat.limitValue ? '#e74c3c' : '#8e9297'">
+            {{ (cat.limitValue > 0 ? cat.spentValue / cat.limitValue : 0) | percent }}
+          </span>
+          <span class="status-text" *ngIf="cat.spentValue > cat.limitValue">Limite excedido!</span>
+        </div>
       </div>
     </div>
   </div>

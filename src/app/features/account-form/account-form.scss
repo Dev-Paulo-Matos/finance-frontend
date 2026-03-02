@@ -1,0 +1,43 @@
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 15px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+mat-dialog-content {
+  min-width: 350px;
+  overflow-x: hidden;
+}
+
+mat-dialog-actions {
+  padding: 20px !important;
+  border-top: 1px solid #f0f0f0;
+}
+
+.custom-content {
+  padding: 20px !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #eee;
+  h2 { margin: 0; font-weight: 600; color: #333; }
+}
+
+.modal-actions {
+  padding: 16px 24px !important;
+  border-top: 1px solid #eee;
+}

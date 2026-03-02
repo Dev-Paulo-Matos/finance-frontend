@@ -39,15 +39,15 @@
   </nav>
 
   <main>
-    @if (loadingService.isLoading()) {
-    <div class="loading-overlay">
-      <mat-spinner diameter="50"></mat-spinner>
-      <span>Carregando seus dados...</span>
-    </div>
-    }
+  <ng-content></ng-content>
 
-    @else {
-    <ng-content></ng-content>
-    }
-  </main>
+  @if (loadingService.isLoading()) {
+    <div class="loading-overlay">
+      <div class="loader-content">
+        <mat-spinner diameter="50"></mat-spinner>
+        <span>Carregando seus dados...</span>
+      </div>
+    </div>
+  }
+</main>
 </div>

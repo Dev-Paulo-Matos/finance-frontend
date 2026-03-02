@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>
+  {{ isViewMode ? 'Detalhes da' : (isEditMode ? 'Editar' : 'Nova') }} Categoria
+</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="form" class="category-form">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" placeholder="Ex: Alimentação">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Descrição</mat-label>
+            <input matInput formControlName="desc" placeholder="Ex: Gastos com restaurante">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="EXPENSE">Despesa</mat-option>
+                <mat-option value="INCOME">Receita</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Limite Mensal</mat-label>
+            <input matInput type="number" formControlName="limitValue">
+            <span matPrefix>R$&nbsp;</span>
+        </mat-form-field>
+
+        <div class="visual-configs">
+          <mat-form-field appearance="outline" class="color-field">
+            <mat-label>Cor</mat-label>
+            <input matInput type="color" formControlName="color">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="icon-field">
+            <mat-label>Ícone (Material Icon)</mat-label>
+            <input matInput formControlName="icon" placeholder="Ex: shopping_cart">
+            <mat-icon matSuffix [style.color]="form.get('color')?.value">
+              {{form.get('icon')?.value}}
+            </mat-icon>
+          </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">{{ isViewMode ? 'Fechar' : 'Cancelar' }}</button>
+    <button *ngIf="!isViewMode" mat-flat-button color="primary" 
+            [disabled]="form.invalid" (click)="onSave()">
+      {{ isEditMode ? 'Atualizar' : 'Salvar' }}
+    </button>
+</mat-dialog-actions>

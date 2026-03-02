@@ -35,6 +35,9 @@
           <mat-error>Obrigatório</mat-error>
         }
       </mat-form-field>
+      @if (errorMessage && isRegisterMode) {
+        <span class="error-api">{{errorMessage}}</span>
+      }
 
       <button type="submit" class="btn-primary">Registration</button>
     </form>

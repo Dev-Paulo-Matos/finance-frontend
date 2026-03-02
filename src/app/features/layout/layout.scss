@@ -191,24 +191,51 @@ nav {
     }
   }
 }
+main {
+  grid-area: main;
+  background-color: #f8faff;
+  border-radius: 12px;
+  padding: 30px;
+  overflow-y: auto;
+  position: relative; // ESSENCIAL para o overlay se prender aqui
+  height: 100%;
+  box-sizing: border-box;
+}
+
 .loading-overlay {
+  position: absolute; // Fixa ele em relação ao main
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  // Efeito de fundo transparente/embaçado
+  background-color: rgba(248, 250, 255, 0.301); // Mesma cor do main mas com opacidade
+  backdrop-filter: blur(4px); // Dá aquele efeito moderno de vidro fosco
+  
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%; // Ocupa a altura total do main
-  width: 100%;
-  gap: 15px;
+  z-index: 999; // Garante que fique acima de qualquer card ou botão
+  border-radius: 12px;
+  
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 
-  span {
-    color: #5c67ff;
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.5px;
+    span {
+      color: #5c67ff;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
   }
+}
 
-  // Cor customizada para o spinner se quiser fugir do padrão
-  ::ng-deep .mat-mdc-progress-spinner {
-    --mdc-circular-progress-active-indicator-color: #5c67ff;
-  }
+// Estilização do Spinner (conforme você já tinha)
+::ng-deep .mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #5c67ff;
 }

@@ -1,0 +1,47 @@
+.full-width {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+mat-dialog-content {
+    min-width: 300px;
+}
+
+.category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.visual-configs {
+  display: grid;
+  grid-template-columns: 80px 1fr; // Deixa a cor pequena e o ícone ocupar o resto
+  gap: 12px;
+  align-items: center;
+
+  .color-field {
+    input[type="color"] {
+      padding: 0;
+      height: 30px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+  }
+}
+
+// Estilização do Modal Lateral para não grudar nas bordas
+mat-dialog-content {
+  overflow-x: hidden;
+  min-width: 350px;
+}
+
+mat-dialog-actions {
+  padding: 16px !important;
+  border-top: 1px solid #eee;
+}

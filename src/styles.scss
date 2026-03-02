@@ -36,3 +36,56 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+/* No arquivo src/styles.scss */
+.side-modal-container {
+  .mat-mdc-dialog-container {
+    padding: 0;
+  }
+
+  .mdc-dialog__surface {
+    border-radius: 0 !important; // Remove arredondamento para parecer um painel lateral
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 400px;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Padronização dos campos de formulário */
+.full-width {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+/* Cor do botão primário para garantir que não fique cinza */
+button[color="primary"] {
+  background-color: #5c67ff !important; 
+  color: white !important;
+}
+
+/* Garante que o menu do 'more_vert' tenha fundo branco e sombra */
+.mat-mdc-menu-panel {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+  min-width: 120px !important;
+}
+
+/* Ajusta o texto dos itens do menu */
+.mat-mdc-menu-item {
+  .mdc-list-item__primary-text {
+    font-size: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px;
+  }
+}
+
+/* Ajuste fino para o Modal Lateral (Side Modal) */
+.side-modal-container .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: #ffffff !important;
+  border-radius: 0 !important;
+}

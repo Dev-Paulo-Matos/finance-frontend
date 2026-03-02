@@ -1,34 +1,68 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Account, AccountService } from '../../core/services/account.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { AccountFormComponent } from '../account-form/account-form';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-
-export interface Account {
-  bank: string;
-  type: string;
-  balance: number;
-  color: string;
-  icon: string;
-  limitUsed?: number; // Para cartões ou limites
-}
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-accounts',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatProgressBarModule],
   templateUrl: './accounts.html',
-  styleUrl: './accounts.scss'
+  styleUrls: ['./accounts.scss'],
+  imports: [CommonModule, MatIcon, MatMenu,MatMenuTrigger]
 })
-export class AccountsComponent {
-  accounts: Account[] = [
-    { bank: 'Nubank', type: 'Conta Corrente', balance: 2500.50, color: '#8A05BE', icon: 'account_balance' },
-    { bank: 'Itaú Personalité', type: 'Investimentos', balance: 15400.00, color: '#EC7000', icon: 'trending_up' },
-    { bank: 'XP Investimentos', type: 'Corretora', balance: 45200.80, color: '#000000', icon: 'leaderboard' },
-    { bank: 'Dinheiro em Espécie', type: 'Carteira', balance: 350.00, color: '#2ecc71', icon: 'payments' }
-  ];
+export class AccountsComponent implements OnInit {
+  accounts: Account[] = [];
+
+  constructor(
+    private accountService: AccountService,
+    private dialog: MatDialog,
+    private changeDetector: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.loadAccounts();
+  }
+
+  loadAccounts() {
+    this.accountService.getAll().subscribe({
+      next: (data) => {
+        this.accounts = data
+        this.changeDetector.detectChanges();
+      },
+      error: (err) => console.error('Erro ao carregar contas', err)
+    });
+  }
 
   getTotalBalance(): number {
-    return this.accounts.reduce((acc, curr) => acc + curr.balance, 0);
+    return this.accounts.reduce((acc, current) => acc + current.balance, 0);
+  }
+
+  openAccountForm(account?: Account, mode: 'create' | 'edit' | 'view' = 'create') {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '400px';
+    dialogConfig.height = '100vh';
+    dialogConfig.position = { right: '0', top: '0' };
+    dialogConfig.panelClass = 'side-modal-container';
+    dialogConfig.data = { account, mode };
+
+    const dialogRef = this.dialog.open(AccountFormComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (mode === 'edit') {
+          this.accountService.update(result.id, result).subscribe(() => this.loadAccounts());
+        } else {
+          this.accountService.create(result).subscribe(() => this.loadAccounts());
+        }
+      }
+    });
+  }
+
+  deleteAccount(id: number) {
+    if (confirm('Deseja realmente excluir esta conta?')) {
+      this.accountService.delete(id).subscribe(() => this.loadAccounts());
+    }
   }
 }
