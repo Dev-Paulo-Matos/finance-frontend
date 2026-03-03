@@ -350,3 +350,245 @@
     }
   }
 }
+.btn-edit, .btn-del, .more-btn, .btn-view {
+  opacity: 0.5;
+  border: none;
+  background-color: #fdfdff; // Exemplo de cor base
+  transition: all 0.2s ease; // Suaviza a transição
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;               // Volta a opacidade total
+    filter: brightness(0.8);  // Escurece o botão em 20%
+  }
+
+  &:active {
+    filter: brightness(0.7);  // Escurece um pouco mais ao clicar
+  }
+}
+.accounts-wrapper {
+  padding: 32px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+
+  .page-header {
+    margin-bottom: 40px;
+    .summary .label { font-size: 12px; font-weight: 700; color: #8e9297; }
+    .total-amount { font-size: 32px; font-weight: 850; margin-top: 5px; }
+  }
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.account-card {
+  background: white;
+  border-radius: 20px;
+  padding: 24px 24px 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+
+  &:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+
+    .bank-info {
+      display: flex; gap: 12px; align-items: center;
+      .bank-logo { 
+        background: #f1f3ff; width: 44px; height: 44px; 
+        border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        color: #5c67ff; 
+      }
+      h3 { margin: 0; font-size: 16px; font-weight: 700; }
+      .description { font-size: 12px; color: #8e9297; }
+    }
+  }
+
+  .card-body {
+    .balance-label { font-size: 12px; color: #8e9297; }
+    .balance { font-size: 24px; font-weight: 800; margin: 5px 0 15px; }
+    .negative { color: #e74c3c; }
+  }
+
+  .card-footer {
+    border-top: 1px solid #f8f9fa;
+    margin: 0 -24px;
+    padding: 8px 12px;
+
+    .view-btn {
+      width: 100%;
+      background: rgba(92, 103, 255, 0.05); // Transparência sutil
+      border: none;
+      color: #5c67ff;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 10px;
+
+      &:hover { background: rgba(92, 103, 255, 0.1); }
+    }
+  }
+}
+
+// Estilo dos botões do Menu (Usando suas classes)
+.btn-edit, .btn-del, .btn-view {
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.04) !important;
+  }
+  
+  mat-icon { font-size: 20px; }
+}
+
+.add-account-card {
+  border: 2px dashed #dcdde1;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 200px;
+  cursor: pointer;
+  color: #8e9297;
+  background: transparent;
+
+  &:hover { 
+    background: white; 
+    border-color: #5c67ff; 
+    color: #5c67ff;
+    mat-icon { transform: scale(1.1); }
+  }
+  
+  mat-icon { font-size: 32px; width: 32px; height: 32px; transition: 0.2s; }
+  span { font-weight: 600; }
+}
+
+.accounts-wrapper {
+  padding: 40px;
+  background-color: #f9fafb; // Fundo leve para o card branco "saltar"
+  min-height: 100vh;
+
+  .page-header {
+    margin-bottom: 48px;
+    .label { font-size: 11px; letter-spacing: 1px; color: #9ca3af; font-weight: 700; }
+    .total-amount { font-size: 36px; font-weight: 900; color: #111827; margin: 4px 0 0; }
+  }
+}
+
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.account-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    border-color: #e5e7eb;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .bank-info {
+      display: flex; gap: 16px; align-items: center;
+      .bank-logo {
+        background: #f3f4ff; color: #5c67ff; width: 48px; height: 48px;
+        border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      }
+      h3 { margin: 0; font-size: 18px; font-weight: 700; color: #1f2937; }
+      .description { font-size: 13px; color: #6b7280; }
+    }
+  }
+
+  .card-body {
+    flex-grow: 1;
+    .balance-label { font-size: 12px; color: #9ca3af; font-weight: 500; }
+    .balance { font-size: 28px; font-weight: 800; color: #111827; margin: 4px 0 20px; }
+    .negative { color: #ef4444; }
+  }
+
+  .card-footer {
+    padding-top: 16px;
+    border-top: 1px solid #f9fafb;
+
+    .extrato-btn {
+      width: 100%;
+      height: 40px;
+      background: rgba(92, 103, 255, 0.04); // Sutil e transparente
+      color: #5c67ff;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 16px;
+
+      &:hover { background: rgba(92, 103, 255, 0.08); }
+    }
+  }
+}
+
+// Botões do Menu com suas classes
+.btn-edit, .btn-del, .btn-view, .extrato-btn {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  &:hover { opacity: 1; }
+}
+
+.add-account-card {
+  border: 2px dashed #e5e7eb;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+
+  .add-content {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    color: #9ca3af;
+    mat-icon { font-size: 40px; width: 40px; height: 40px; }
+    span { font-weight: 700; font-size: 14px; }
+  }
+
+  &:hover {
+    background: #ffffff;
+    border-color: #5c67ff;
+    .add-content { color: #5c67ff; }
+  }
+}
+
+.extrato-btn {
+  border: none;
+  align-items: center;
+}

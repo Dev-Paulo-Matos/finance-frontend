@@ -65,4 +65,6 @@ export class AccountsComponent implements OnInit {
       this.accountService.delete(id).subscribe(() => this.loadAccounts());
     }
   }
+
+  
 }

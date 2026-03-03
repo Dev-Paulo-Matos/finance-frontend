@@ -85,7 +85,10 @@ button[color="primary"] {
 }
 
 /* Ajuste fino para o Modal Lateral (Side Modal) */
-.side-modal-container .mat-mdc-dialog-container .mdc-dialog__surface {
+::ng-deep .side-modal-container {
+  .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: #ffffff !important;
   border-radius: 0 !important;
+}
+
 }

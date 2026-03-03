@@ -1,65 +1,69 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-
-export interface TransactionData {
-  id: number;
-  date: string;
-  description: string;
-  category: string;
-  value: number;
-  status: 'completed' | 'pending' | 'failed';
-}
+import { MatMenuModule } from '@angular/material/menu'; // Certifique-on de importar o Module e não só o MatMenu
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { Transaction, TransactionService } from '../../core/services/transacoes.service';
+import { TransactionFormComponent } from '../transaction-form/transaction-form';
 
 @Component({
   selector: 'app-transactions',
   standalone: true,
   imports: [
-    CommonModule, MatTableModule, MatPaginatorModule, 
-    MatSortModule, MatButtonModule, MatIconModule, MatChipsModule
+    CommonModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    MatMenuModule, 
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './transactions.html',
   styleUrl: './transactions.scss'
 })
 export class TransactionsComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'description', 'category', 'value', 'status', 'actions'];
-  dataSource: MatTableDataSource<TransactionData>;
+  // Seus dados mockados
+  transactions: Transaction[] = [];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  constructor(private dialog: MatDialog, private transactionsService: TransactionService, private cd: ChangeDetectorRef) {}
 
-  constructor() {
-    // Dados Fictícios para teste
-    const transactions: TransactionData[] = [
-      { id: 1, date: '2026-02-27', description: 'Apple Store', category: 'Eletrônicos', value: -1200.00, status: 'completed' },
-      { id: 2, date: '2026-02-26', description: 'Salário Mensal', category: 'Renda', value: 5500.00, status: 'completed' },
-      { id: 3, date: '2026-02-25', description: 'Supermercado BH', category: 'Alimentação', value: -450.25, status: 'pending' },
-      { id: 4, date: '2026-02-24', description: 'Netflix', category: 'Lazer', value: -55.90, status: 'completed' },
-      // Adicione mais para testar o scroll/paginação...
-    ];
-    this.dataSource = new MatTableDataSource(transactions);
+  ngOnInit(): void {
+    this.configureList();
   }
 
-  ngOnInit() {
-    // Conecta a paginação após a view carregar
+  private configureList() {
+    this.transactionsService.getAll().subscribe(value => {this.transactions = value; this.cd.detectChanges();});
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  openTransactionForm(transaction: any = null, mode: 'create' | 'edit' | 'view' = 'create') {
+    const dialogRef = this.dialog.open(TransactionFormComponent, {
+      width: '450px',
+      maxWidth: '100vw',
+      panelClass: 'side-modal-container', // Sua classe de modal lateral
+      position: { right: '0', top: '0' },
+      data: { transaction, mode }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (mode === 'view' || !result) {
+        return;
+      }
+      if (mode === 'create') {
+        this.transactionsService.create(result).subscribe(() => this.configureList());
+        return;
+      }
+      if (mode === 'edit') {
+        this.transactionsService.update(result?.id, result).subscribe(() => this.configureList());
+      }
+    });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  deleteTransaction(id: number | undefined) {
+    if(id) {
+      this.transactionsService.delete(id).subscribe(() => this.configureList());
+    }
   }
-
-  addTransaction() {
-    console.log('Abrir modal de nova transação');
-  }
-}
+} 

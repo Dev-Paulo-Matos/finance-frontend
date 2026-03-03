@@ -4,13 +4,10 @@
       <span class="label">PATRIMÔNIO TOTAL</span>
       <h1 class="total-amount">{{ getTotalBalance() | currency:'BRL' }}</h1>
     </div>
-    <button mat-flat-button color="primary" class="add-btn-top" (click)="openAccountForm()">
-      <mat-icon>add</mat-icon> Nova Conta
-    </button>
   </header>
 
   <div class="accounts-grid">
-    <div class="account-card mat-elevation-z2" *ngFor="let acc of accounts">
+    <div class="account-card" *ngFor="let acc of accounts" (click)="openAccountForm(acc, 'view')">
       <div class="card-header">
         <div class="bank-info">
           <div class="bank-logo">
@@ -22,18 +19,19 @@
           </div>
         </div>
         
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="more-btn" (click)="$event.stopPropagation()">
           <mat-icon>more_vert</mat-icon>
         </button>
         
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openAccountForm(acc, 'edit')">
-            <mat-icon>edit</mat-icon>
-            <span>Editar</span>
+          <button mat-menu-item (click)="openAccountForm(acc, 'view')" class="btn-view">
+            <mat-icon color="primary">visibility</mat-icon>
           </button>
-          <button mat-menu-item (click)="deleteAccount(acc.id)">
+          <button mat-menu-item (click)="openAccountForm(acc, 'edit')" class="btn-edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-menu-item (click)="deleteAccount(acc.id)" class="btn-del">
             <mat-icon color="warn">delete</mat-icon>
-            <span>Excluir</span>
           </button>
         </mat-menu>
       </div>
@@ -46,16 +44,18 @@
       </div>
 
       <div class="card-footer">
-        <button mat-button color="primary" class="view-btn">
-          Ver Extrato
-          <mat-icon iconPositionEnd>chevron_right</mat-icon>
+        <button mat-button class="extrato-btn">
+          <span>Ver Extrato</span>
+          <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
     </div>
 
-    <button class="add-account-card" (click)="openAccountForm()">
-      <mat-icon>add_circle_outline</mat-icon>
-      <span>Adicionar Nova Conta</span>
-    </button>
+    <div class="add-account-card" (click)="openAccountForm()">
+      <div class="add-content">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Nova Conta</span>
+      </div>
+    </div>
   </div>
 </div>
