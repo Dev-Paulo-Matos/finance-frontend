@@ -1,0 +1,168 @@
+<div id="auth-container" class="h-full flex items-center justify-center">
+
+  <div class="w-full max-w-md mx-4">
+
+    <!-- LOGIN -->
+    <div *ngIf="showLogin"
+         class="bg-slate-800 rounded-2xl border border-slate-700 p-8 shadow-2xl">
+
+      <div class="text-center mb-8">
+
+        <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <ng-icon name="wallet" class="w-8 h-8 text-emerald-400"></ng-icon>
+        </div>
+
+        <h1 class="text-2xl font-bold mb-2">Finanças</h1>
+        <p class="text-slate-400 text-sm">Gerencie suas contas e transações</p>
+
+      </div>
+
+      <form class="space-y-4 mb-6" (ngSubmit)="handleLogin()">
+
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Email</label>
+
+          <input
+            type="email"
+            [(ngModel)]="login.email"
+            name="email"
+            required
+            class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            placeholder="seu@email.com">
+        </div>
+
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Senha</label>
+
+          <input
+            type="password"
+            [(ngModel)]="login.password"
+            name="password"
+            required
+            class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            placeholder="••••••••">
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors font-medium mt-6">
+          Entrar
+        </button>
+
+      </form>
+
+      <div class="text-center">
+        <p class="text-slate-400 text-sm">
+          Não tem conta?
+          <button
+            type="button"
+            (click)="switchToRegister()"
+            class="text-emerald-400 hover:text-emerald-300 font-semibold">
+            Criar conta
+          </button>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- REGISTER -->
+    <div *ngIf="!showLogin"
+         class="bg-slate-800 rounded-2xl border border-slate-700 p-8 shadow-2xl">
+
+      <div class="text-center mb-8">
+
+        <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <ng-icon name="user-plus" class="w-8 h-8 text-emerald-400"></ng-icon>
+        </div>
+
+        <h1 class="text-2xl font-bold mb-2">Criar Conta</h1>
+        <p class="text-slate-400 text-sm">Comece a gerenciar suas finanças</p>
+
+      </div>
+
+      <form class="space-y-4 mb-6" (ngSubmit)="handleRegister()">
+
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Nome Completo</label>
+
+          <input
+            type="text"
+            [(ngModel)]="register.name"
+            name="name"
+            required
+            class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            placeholder="Seu nome completo">
+        </div>
+
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Email</label>
+
+          <input
+            type="email"
+            [(ngModel)]="register.email"
+            name="emailRegister"
+            required
+            class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            placeholder="seu@email.com">
+        </div>
+
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Telefone</label>
+
+          <input
+            type="tel"
+            [(ngModel)]="register.phone"
+            name="phone"
+            class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            placeholder="(11) 99999-9999">
+        </div>
+
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Senha</label>
+
+          <input
+            type="password"
+            [(ngModel)]="register.password"
+            name="passwordRegister"
+            required
+            class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            placeholder="••••••••">
+        </div>
+
+        <div>
+          <label class="block text-sm text-slate-400 mb-2">Confirmar Senha</label>
+
+          <input
+            type="password"
+            [(ngModel)]="register.confirmPassword"
+            name="confirmPassword"
+            required
+            class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:border-emerald-500 text-white"
+            placeholder="••••••••">
+        </div>
+
+        <button
+          type="submit"
+          class="w-full py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors font-medium mt-6">
+          Criar Conta
+        </button>
+
+      </form>
+
+      <div class="text-center">
+        <p class="text-slate-400 text-sm">
+          Já tem conta?
+          <button
+            type="button"
+            (click)="switchToLogin()"
+            class="text-emerald-400 hover:text-emerald-300 font-semibold">
+            Fazer login
+          </button>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,16 +1,16 @@
-import { Component, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { Layout } from './features/layout/layout';
+import { NavbarHeader } from "./features/navbar-header/navbar-header";
+import { NavbarLateral } from './features/navbar-lateral/navbar-lateral';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    Layout
-  ],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, NavbarHeader, NavbarLateral], // Importe o componente aqui
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
+  templateUrl: './app.html'
 })
-export class App {
-  protected readonly title = signal('finance-frontend');
+export class AppComponent {
+  // ... sua lógica
 }

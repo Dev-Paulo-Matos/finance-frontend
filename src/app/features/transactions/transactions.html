@@ -1,59 +1,40 @@
-<div class="transactions-wrapper">
-  <header class="page-header">
-    <div class="title-group">
-      <h1>Transações</h1>
-      <p>Gerencie sua movimentação financeira</p>
-    </div>
-    <button mat-flat-button color="primary" class="add-btn" (click)="openTransactionForm()">
-      <mat-icon>add</mat-icon> Nova Transação
-    </button>
-  </header>
+<div id="tab-transactions" class="tab-content">
+  <div class="bg-slate-800 rounded-xl border border-slate-700">
 
-  <div class="transactions-card mat-elevation-z2">
-    <div class="filter-bar">
-      <mat-form-field appearance="outline" class="search-field">
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput placeholder="Buscar transação...">
-      </mat-form-field>
-      
-      <div class="actions">
-        <button mat-stroked-button><mat-icon>filter_list</mat-icon> Filtrar</button>
-      </div>
+    <div class="p-6 border-b border-slate-700 flex items-center justify-between">
+      <h3 class="font-semibold">Transações</h3>
+
+      <button
+        class="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">
+
+        <ng-icon name="tablerPlus" class="w-4 h-4"></ng-icon>
+        <span>Nova Transação</span>
+
+      </button>
     </div>
 
-    <div class="transaction-list">
-      <div class="transaction-item" *ngFor="let t of transactions" (click)="openTransactionForm(t, 'view')">
-        <div class="item-left">
-          <div class="type-icon" [class.income]="t.type === 'INCOME'" [class.expense]="t.type === 'EXPENSE'">
-            <mat-icon>{{ t.type === 'INCOME' ? 'north_east' : 'south_west' }}</mat-icon>
-          </div>
-          <div class="info">
-            <span class="desc">{{ t.description }}</span>
-            <span class="details">{{ t.categoryName }} • {{ t.accountName }}</span>
-          </div>
-        </div>
-        
-        <div class="item-right">
-          <div class="amount-group">
-            <span class="value" [class.income]="t.type === 'INCOME'" [class.expense]="t.type === 'EXPENSE'">
-              {{ t.type === 'EXPENSE' ? '-' : '+' }} {{ t.amount | currency:'BRL' }}
-            </span>
-            <span class="date">{{ t.date | date:'dd MMM' }}</span>
-          </div>
-          <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-        </div>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-slate-700/50">
+          <tr>
+            <th class="text-left px-6 py-4 text-sm font-medium text-slate-400">Data</th>
+            <th class="text-left px-6 py-4 text-sm font-medium text-slate-400">Descrição</th>
+            <th class="text-left px-6 py-4 text-sm font-medium text-slate-400">Categoria</th>
+            <th class="text-left px-6 py-4 text-sm font-medium text-slate-400">Conta</th>
+            <th class="text-right px-6 py-4 text-sm font-medium text-slate-400">Valor</th>
+            <th class="text-right px-6 py-4 text-sm font-medium text-slate-400">Ações</th>
+          </tr>
+        </thead>
 
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item class="btn-edit" (click)="openTransactionForm(t, 'edit')">
-            <mat-icon>edit</mat-icon> Editar
-          </button>
-          <button mat-menu-item class="btn-del" (click)="deleteTransaction(t.id)">
-            <mat-icon color="warn">delete</mat-icon> Excluir
-          </button>
-        </mat-menu>
-      </div>
+        <tbody id="transactions-table" class="divide-y divide-slate-700">
+          <tr>
+            <td colspan="6" class="px-6 py-8 text-center text-slate-500">
+              Nenhuma transação cadastrada
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
   </div>
 </div>

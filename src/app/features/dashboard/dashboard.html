@@ -1,73 +1,62 @@
-<div class="dashboard-wrapper">
-  <header class="welcome-header">
-    <h1>Hi, <span>{{ userName }}</span></h1>
-    <p>Gerencie suas finanças selecionando uma categoria abaixo.</p>
-  </header>
+<div id="tab-dashboard" class="tab-content">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
-  <div class="stats-grid">
-    <div class="selectable-card" [class.active]="activeTab === 'contas'" (click)="setTab('contas')">
-      <div class="icon-circle shadow-blue">
-        <mat-icon>account_balance</mat-icon>
+    <!-- Saldo -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-slate-400 text-sm">Saldo Total</span>
+
+        <div class="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+          <ng-icon name="tablerWallet" class="w-5 h-5 text-emerald-400"></ng-icon>
+        </div>
       </div>
-      <div class="info">
-        <span class="label">Minhas Contas</span>
-        <h2 class="value">03</h2>
-      </div>
+
+      <p id="total-balance" class="text-2xl font-bold text-emerald-400">
+        R$ 0,00
+      </p>
     </div>
 
-    <div class="selectable-card" [class.active]="activeTab === 'transacoes'" (click)="setTab('transacoes')">
-      <div class="icon-circle shadow-pink">
-        <mat-icon>swap_horiz</mat-icon>
+    <!-- Receitas -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-slate-400 text-sm">Receitas</span>
+
+        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+          <ng-icon name="tablerTrendingUp" class="w-5 h-5 text-blue-400"></ng-icon>
+        </div>
       </div>
-      <div class="info">
-        <span class="label">Transações</span>
-        <h2 class="value">150</h2>
-      </div>
+
+      <p id="total-income" class="text-2xl font-bold text-blue-400">
+        R$ 0,00
+      </p>
     </div>
 
-    <div class="selectable-card" [class.active]="activeTab === 'categorias'" (click)="setTab('categorias')">
-      <div class="icon-circle shadow-yellow">
-        <mat-icon>category</mat-icon>
+    <!-- Despesas -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-slate-400 text-sm">Despesas</span>
+
+        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
+          <ng-icon name="tablerTrendingDown" class="w-5 h-5 text-red-400"></ng-icon>
+        </div>
       </div>
-      <div class="info">
-        <span class="label">Categorias</span>
-        <h2 class="value">12</h2>
-      </div>
+
+      <p id="total-expenses" class="text-2xl font-bold text-red-400">
+        R$ 0,00
+      </p>
     </div>
+
   </div>
 
-  <div class="table-container card">
-    <div class="table-header">
-        <div class="config-list-header">
-            <h3>Lista de {{ activeTab | titlecase }}</h3>
-            <p>Ultimos 5 registros</p>
-        </div>
-      <button mat-flat-button color="primary">
-        <mat-icon>add</mat-icon> Novo
-      </button>
+  <div class="bg-slate-800 rounded-xl border border-slate-700">
+    <div class="p-6 border-b border-slate-700">
+      <h3 class="font-semibold">Últimas Transações</h3>
     </div>
 
-    <div class="content-area">
-      <table *ngIf="activeTab === 'contas'">
-        <thead><tr><th>Banco</th><th>Tipo</th><th>Saldo</th></tr></thead>
-        <tbody>
-          <tr *ngFor="let c of contas"><td>{{c.banco}}</td><td>{{c.tipo}}</td><td>{{c.saldo | currency}}</td></tr>
-        </tbody>
-      </table>
-
-      <table *ngIf="activeTab === 'transacoes'">
-        <thead><tr><th>Data</th><th>Descrição</th><th>Valor</th></tr></thead>
-        <tbody>
-          <tr *ngFor="let t of transacoes"><td>{{t.data}}</td><td>{{t.desc}}</td><td [style.color]="t.valor < 0 ? 'red' : 'green'">{{t.valor | currency}}</td></tr>
-        </tbody>
-      </table>
-
-      <table *ngIf="activeTab === 'categorias'">
-        <thead><tr><th>Categoria</th><th>Limite</th><th>Gasto Atual</th></tr></thead>
-        <tbody>
-          <tr *ngFor="let cat of categorias"><td>{{cat.nome}}</td><td>{{cat.limite | currency}}</td><td>{{cat.gasto | currency}}</td></tr>
-        </tbody>
-      </table>
+    <div id="recent-transactions" class="p-6">
+      <p class="text-slate-500 text-center py-8">
+        Nenhuma transação registrada
+      </p>
     </div>
   </div>
 </div>

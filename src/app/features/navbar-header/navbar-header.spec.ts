@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccountForm } from './account-form';
+import { NavbarHeader } from './navbar-header';
 
-describe('AccountForm', () => {
-  let component: AccountForm;
-  let fixture: ComponentFixture<AccountForm>;
+describe('NavbarHeader', () => {
+  let component: NavbarHeader;
+  let fixture: ComponentFixture<NavbarHeader>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AccountForm]
+      imports: [NavbarHeader]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AccountForm);
+    fixture = TestBed.createComponent(NavbarHeader);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

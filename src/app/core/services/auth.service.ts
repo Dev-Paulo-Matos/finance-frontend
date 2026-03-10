@@ -17,43 +17,54 @@ interface RegisterType {
   passCode: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private userSubject = new BehaviorSubject<boolean>(this.hasToken());
 
-  private baseUrl = `${environment.apiUrl}/auth`
+  private baseUrl = `${environment.apiUrl}/auth`;
+  private tokenKey = 'token';
 
-  constructor(private http: HttpClient) { }
+  private loggedSubject = new BehaviorSubject<boolean>(this.hasToken());
 
-  public login(credentials: LoginType): Observable<AuthResponse> {
+  constructor(private http: HttpClient) {}
+
+  login(credentials: LoginType): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, credentials).pipe(
-      tap(res => {
-        localStorage.setItem('token', res.token);
-        this.userSubject.next(true);
-      })
+      tap((res) => this.setSession(res.token))
     );
   }
 
-  public register(credentials: RegisterType): Observable<AuthResponse> {
+  register(credentials: RegisterType): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, credentials).pipe(
-      tap(res => {
-        localStorage.setItem('token', res.token);
-        this.userSubject.next(true);
-      })
+      tap((res) => this.setSession(res.token))
     );
   }
 
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    this.loggedSubject.next(false);
+  }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.userSubject.next(false);
+  private setSession(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+    this.loggedSubject.next(true);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 
   private hasToken(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem(this.tokenKey);
   }
 
-  get isLoggedIn$() {
-    return this.userSubject.asObservable();
+  get isLoggedIn$(): Observable<boolean> {
+    return this.loggedSubject.asObservable();
   }
+
 }

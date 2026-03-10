@@ -1,35 +1,66 @@
 import { Routes } from '@angular/router';
-import { LoginRegisterComponent } from './features/auth/login-register/login-register';
-import { DashboardComponent } from './features/dashboard/dashboard';
 import { AuthGuard } from './core/guards/auth.guard';
-import { TransactionsComponent } from './features/transactions/transactions';
-import { AccountsComponent } from './features/accounts/accounts';
-import { CategoriesComponent } from './features/categories/categories';
+import { GuestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
-    {
-        component: LoginRegisterComponent,
-        path: 'login',
-        
-    },
-    {
-        component: DashboardComponent,
+
+  {
+    path: '',
+    canActivateChild: [AuthGuard],
+    children: [
+
+      {
         path: 'dashboard',
-        canActivate: [AuthGuard]
-    },
-    {
-        component: TransactionsComponent,
-        path: 'transactions',
-        canActivate: [AuthGuard]
-    },
-    {
-        component: AccountsComponent,
+        loadComponent: () =>
+          import('./features/dashboard/dashboard')
+            .then(m => m.Dashboard),
+        data: { animation: 'dashboard' }
+      },
+
+      {
         path: 'accounts',
-        canActivate: [AuthGuard]
-    },
-     {
-        component: CategoriesComponent,
+        loadComponent: () =>
+          import('./features/accounts/accounts')
+            .then(m => m.Accounts),
+        data: { animation: 'accounts' }
+      },
+
+      {
         path: 'categories',
-        canActivate: [AuthGuard]
-    },
+        loadComponent: () =>
+          import('./features/categories/categories')
+            .then(m => m.Categories),
+        data: { animation: 'categories' }
+      },
+
+      {
+        path: 'transactions',
+        loadComponent: () =>
+          import('./features/transactions/transactions')
+            .then(m => m.Transactions),
+        data: { animation: 'transactions' }
+      },
+
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      }
+
+    ]
+  },
+
+  {
+    path: 'login-register',
+    canActivate: [GuestGuard],
+    loadComponent: () =>
+      import('./features/login-register/login-register')
+        .then(m => m.LoginRegister)
+  },
+
+  {
+    path: '**',
+    redirectTo: 'dashboard'
+  }
+
 ];

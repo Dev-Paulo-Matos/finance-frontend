@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-transactions',
+  selector: 'app-navbar-header',
   imports: [CommonModule, NgIcon],
-  templateUrl: './transactions.html',
-  styleUrl: './transactions.scss',
+  templateUrl: './navbar-header.html',
+  styleUrl: './navbar-header.scss',
 })
-export class Transactions {
+export class NavbarHeader {
 
 }
