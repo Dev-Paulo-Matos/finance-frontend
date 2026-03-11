@@ -1,16 +1,36 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarHeader } from "./features/navbar-header/navbar-header";
 import { NavbarLateral } from './features/navbar-lateral/navbar-lateral';
+import { AuthService } from './core/services/auth.service';
+import { UserService } from './core/services/user.service';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarHeader, NavbarLateral], // Importe o componente aqui
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], 
+  imports: [CommonModule, RouterOutlet, NavbarHeader, NavbarLateral, LoaderComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './app.html'
 })
-export class AppComponent {
-  // ... sua lógica
+export class AppComponent implements OnInit {
+
+  private authService = inject(AuthService);
+  private userService = inject(UserService);
+
+  public isAppReady$ = this.userService.userIn$
+
+  ngOnInit(): void {
+    this.configureIfNotExistUser();
+  }
+
+  private configureIfNotExistUser() {
+    const hasToken = this.authService.isAuthenticated();
+    const hasUser = this.userService.getUser();
+
+    if (hasToken && !hasUser) {
+      this.userService.me().subscribe();
+    }
+  }
 }

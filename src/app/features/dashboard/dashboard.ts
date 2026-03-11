@@ -10,5 +10,5 @@ import { tablerTrendingDown, tablerWallet } from '@ng-icons/tabler-icons';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-
+  
 }

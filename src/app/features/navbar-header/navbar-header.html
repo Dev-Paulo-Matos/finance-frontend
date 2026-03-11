@@ -10,12 +10,12 @@
         <ng-icon name="tablerUser" class="w-4 h-4 text-white"></ng-icon>
       </div>
 
-      <span id="user-name" class="text-sm font-medium">Usuário</span>
+      <span id="user-name" class="text-sm font-medium">{{user?.username}}</span>
     </div>
 
     <button
-      class="flex items-center gap-2 px-4 py-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-colors">
-
+      class="flex items-center gap-2 px-4 py-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-colors" (click)="logout()">
+      
       <ng-icon name="tablerLogout" class="w-4 h-4"></ng-icon>
       <span class="text-sm">Sair</span>
 
