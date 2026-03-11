@@ -6,11 +6,12 @@ import { NavbarLateral } from './features/navbar-lateral/navbar-lateral';
 import { AuthService } from './core/services/auth.service';
 import { UserService } from './core/services/user.service';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { SideDrawerComponent } from './shared/drawer/side-drawer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarHeader, NavbarLateral, LoaderComponent],
+  imports: [CommonModule, RouterOutlet, NavbarHeader, NavbarLateral, LoaderComponent, SideDrawerComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './app.html'
 })

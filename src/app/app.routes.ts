@@ -29,7 +29,7 @@ export const routes: Routes = [
         path: 'categories',
         loadComponent: () =>
           import('./features/categories/categories')
-            .then(m => m.Categories),
+            .then(m => m.CategoriesComponent),
         data: { animation: 'categories' }
       },
 

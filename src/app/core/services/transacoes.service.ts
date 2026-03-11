@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Categories } from './category.service';
 import { Account } from './account.service';
+import { Category } from '../models/finance.model';
 export interface Transaction {
   id?: number;
   description: string;
   amount: number;
   date: Date;
   type: 'INCOME' | 'EXPENSE';
-  category: Categories;
+  category: Category;
   account: Account;
 }
 

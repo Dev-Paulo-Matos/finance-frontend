@@ -6,10 +6,14 @@ export interface Account {
 }
 
 export interface Category {
-  __backendId?: string;
-  type: 'category';
-  category_name: string;
-  category_type: 'income' | 'expense';
+  id: number;
+  name: string;
+  desc: string;
+  type: 'INCOME' | 'EXPENSE';
+  limitValue: number;
+  spentValue: number;
+  color: string;
+  icon: string;
 }
 
 export interface Transaction {

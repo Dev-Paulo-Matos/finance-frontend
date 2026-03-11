@@ -1,0 +1,12 @@
+@keyframes drawer {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-drawer {
+  animation: drawer 0.25s ease-out;
+}

@@ -1,0 +1,120 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  class="flex flex-col gap-5">
+
+  <!-- Nome -->
+  <div class="flex flex-col gap-1">
+
+    <label class="text-sm text-slate-400">
+      Nome da categoria
+    </label>
+
+    <input
+      formControlName="name"
+      type="text"
+      placeholder="Ex: Alimentação"
+      class="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-emerald-500">
+
+  </div>
+
+  <!-- Descrição -->
+  <div class="flex flex-col gap-1">
+
+    <label class="text-sm text-slate-400">
+      Descrição
+    </label>
+
+    <input
+      formControlName="descriptor"
+      type="text"
+      placeholder="Opcional"
+      class="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+
+  </div>
+
+  <!-- Tipo -->
+  <div class="flex flex-col gap-1">
+
+    <label class="text-sm text-slate-400">
+      Tipo
+    </label>
+
+    <select
+      formControlName="transactionType"
+      class="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+
+      <option value="EXPENSE">Despesa</option>
+      <option value="INCOME">Receita</option>
+
+    </select>
+
+  </div>
+
+  <!-- Limite -->
+  <div class="flex flex-col gap-1">
+
+    <label class="text-sm text-slate-400">
+      Limite mensal
+    </label>
+
+    <input
+      formControlName="limitValue"
+      type="number"
+      placeholder="0.00"
+      class="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+
+  </div>
+
+  <!-- Cor -->
+  <div class="flex flex-col gap-1">
+
+    <label class="text-sm text-slate-400">
+      Cor
+    </label>
+
+    <input
+      formControlName="color"
+      type="color"
+      class="h-10 bg-slate-800 border border-slate-700 rounded-lg">
+
+  </div>
+
+  <!-- Icon -->
+  <div class="flex flex-col gap-1">
+
+    <label class="text-sm text-slate-400">
+      Ícone
+    </label>
+
+    <input
+      formControlName="icon"
+      type="text"
+      placeholder="Ex: tabler:shopping-cart"
+      class="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+
+  </div>
+
+  <!-- Botões -->
+  <div class="flex justify-end gap-3 pt-4">
+
+    <button
+      type="button"
+      (click)="drawer.close()"
+      class="px-4 py-2 rounded-lg bg-slate-700 text-white">
+
+      Cancelar
+
+    </button>
+
+    <button
+      type="submit"
+      class="px-4 py-2 rounded-lg bg-emerald-500 text-white">
+
+      Salvar
+
+    </button>
+
+  </div>
+
+</form>

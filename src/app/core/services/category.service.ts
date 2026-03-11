@@ -2,17 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-export interface Categories {
-  id: number;
-  name: string;
-  desc: string; // Mapeia para o 'desc' do Record
-  type: 'INCOME' | 'EXPENSE'; // Baseado no seu TransactionType enum
-  // Campos abaixo são opcionais por enquanto, já que o Java não os envia
-  limitValue: number;
-  spentValue: number;
-  color: string;
-  icon: string;
-}
+import { Category } from '../models/finance.model';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
@@ -20,19 +10,19 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  public getAll(): Observable<Categories[]> {
-    return this.http.get<Categories[]>(this.baseUrl, {
+  public getAll(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.baseUrl, {
       responseType: "json",
       
     });
   }
 
-  public update(id: number, category: any): Observable<Categories> {
-  return this.http.put<Categories>(`${this.baseUrl}/${id}`, category);
+  public update(id: number, category: any): Observable<Category> {
+  return this.http.put<Category>(`${this.baseUrl}/${id}`, category);
 }
 
-  public create(category: Partial<Categories>): Observable<Categories> {
-    return this.http.post<Categories>(this.baseUrl, category);
+  public create(category: Partial<Category>): Observable<Category> {
+    return this.http.post<Category>(this.baseUrl, category);
   }
 
   public delete(id: number): Observable<void> {

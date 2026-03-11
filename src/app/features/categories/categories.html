@@ -5,7 +5,8 @@
       <h3 class="font-semibold">Categorias</h3>
 
       <button
-        class="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors">
+        class="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+        (click)="novaCategoriaDrawer()">
 
         <ng-icon name="tablerPlus" class="w-4 h-4"></ng-icon>
         <span>Nova Categoria</span>
@@ -24,12 +25,50 @@
           </tr>
         </thead>
 
-        <tbody id="categories-table" class="divide-y divide-slate-700">
-          <tr>
+        <tbody class="divide-y divide-slate-700">
+
+          <tr *ngIf="categories.length === 0">
             <td colspan="3" class="px-6 py-8 text-center text-slate-500">
               Nenhuma categoria cadastrada
             </td>
           </tr>
+
+          <tr *ngFor="let category of categories">
+
+            <td class="px-6 py-4 flex items-center gap-3">
+
+              <div class="w-3 h-3 rounded-full" [style.background]="category.color">
+              </div>
+
+              {{ category.name }}
+
+            </td>
+
+            <td class="px-6 py-4">
+
+              <span class="px-2 py-1 text-xs rounded" [ngClass]="{
+          'bg-red-500/20 text-red-400': category.type === 'EXPENSE',
+          'bg-emerald-500/20 text-emerald-400': category.type === 'INCOME'
+        }">
+
+                {{ category.type === 'EXPENSE' ? 'Despesa' : 'Receita' }}
+
+              </span>
+
+            </td>
+
+            <td class="px-6 py-4 text-right">
+
+              <button class="text-slate-400 hover:text-white">
+
+                <ng-icon name="tablerEdit"></ng-icon>
+
+              </button>
+
+            </td>
+
+          </tr>
+
         </tbody>
 
       </table>
