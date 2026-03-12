@@ -9,11 +9,16 @@ export class SideDrawerService {
   title = signal('');
   component = signal<Type<any> | null>(null);
   data = signal<any>(null);
+  methodUpdateList = signal<() => void>(() => {});
 
-  open(component: Type<any>, options?: { title?: string, data?: any }) {
+  open(
+    component: Type<any>,
+    options?: { methodUpdateList?: () => void; title?: string; data?: any }
+  ) {
 
     this.title.set(options?.title ?? '');
     this.data.set(options?.data ?? null);
+    this.methodUpdateList.set(options?.methodUpdateList ?? (() => {}));
     this.component.set(component);
     this.isOpen.set(true);
 
@@ -22,6 +27,7 @@ export class SideDrawerService {
   close() {
     this.isOpen.set(false);
     this.component.set(null);
+    this.methodUpdateList.set(() => {});
     this.data.set(null);
   }
 

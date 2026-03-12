@@ -35,7 +35,8 @@ export const appConfig: ApplicationConfig = {
       tablerTrendingUp,
       tablerTrendingDown,
       tablerPlus,
-      tablerEdit
+      tablerEdit,
+      tablerTrash
     })
   ]
 };

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
 import { CategoriesForm } from '../category-form/category-form';
@@ -19,6 +19,7 @@ export class CategoriesComponent implements OnInit {
   private categoryService = inject(CategoryService);
 
   public categories: Category[] = [];
+  private cd = inject(ChangeDetectorRef)
 
   ngOnInit(): void {
     this.getAllItens();
@@ -26,7 +27,8 @@ export class CategoriesComponent implements OnInit {
 
   public novaCategoriaDrawer() {
     this.drawer.open(CategoriesForm, {
-      title: 'Nova categoria'
+      title: 'Nova categoria',
+      methodUpdateList: this.getAllItens.bind(this)
     });
   }
 
@@ -35,9 +37,22 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getAll().subscribe({
       next: (categories) => {
         this.categories = categories;
+        this.cd.detectChanges();
       }
     });
 
+  }
+
+  public deleteCategory(category: Category) {
+    this.categoryService.delete(category.id).subscribe(() => this.getAllItens())
+  }
+
+  public btnEdit(category: Category) {
+     this.drawer.open(CategoriesForm, {
+      title: 'Editar categoria',
+      data: category,
+      methodUpdateList: this.getAllItens.bind(this)
+    });
   }
 
 }

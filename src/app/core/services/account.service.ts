@@ -6,8 +6,10 @@ import { Injectable } from '@angular/core';
 export interface Account {
   id: number;
   name: string;
-  desc: string;    // Mapeia para o 'descriptor' no Java
-  balance: number; // Saldo atual da conta
+  descriptor?: string;
+  balance: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 @Injectable({ providedIn: 'root' })
