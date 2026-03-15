@@ -3,7 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
 import { CategoryService } from '../../core/services/category.service';
-import { Category } from '../../core/models/finance.model';
+import { CategoryRequest, TransactionType } from '../../../types/api-types';
 
 @Component({
   selector: 'app-category-form',
@@ -21,7 +21,7 @@ export class CategoriesForm implements OnInit {
   form = this.fb.nonNullable.group({
     name: ['', Validators.required],
     desc: [''],
-    type: ['EXPENSE' as 'EXPENSE' | 'INCOME', Validators.required],
+    type: ['EXPENSE' as TransactionType, Validators.required],
     limitValue: [0],
     color: ['#22c55e'],
     icon: ['']
@@ -45,7 +45,7 @@ export class CategoriesForm implements OnInit {
       return;
     }
 
-    const data: Partial<Category> = this.form.getRawValue();
+    const data: Partial<CategoryRequest> = this.form.getRawValue();
 
     if(this.id) {
       this.methodUpdate(data);
@@ -55,7 +55,7 @@ export class CategoriesForm implements OnInit {
   }
 
 
-  private methodCreate(data: Partial<Category>) {
+  private methodCreate(data: Partial<CategoryRequest>) {
     this.categoryService.create(data).subscribe({
       next: () => {
         this.form.reset();
@@ -65,7 +65,7 @@ export class CategoriesForm implements OnInit {
     });
   }
 
-  private methodUpdate(data: Partial<Category>) {
+  private methodUpdate(data: Partial<CategoryRequest>) {
     this.categoryService.update(this.id ?? 0, data).subscribe({
       next: () => {
         this.form.reset();

@@ -70,7 +70,8 @@ export class LoginRegister {
       name: name!,
       email: email!,
       password: password!,
-      passCode: 'default'
+      passCode: 'default',
+      phone: ''
     }).subscribe({
       next: () =>this.router.navigate(['dashboard']),
       error: (err) => {

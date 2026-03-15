@@ -1,23 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
-import { AuthResponse, User } from '../models/auth.model';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
-
-interface LoginType {
-  email: string;
-  password: string;
-}
-
-interface RegisterType {
-  userName: string;
-  name: string;
-  email: string;
-  password: string;
-  passCode: string;
-}
+import { AuthResponse, LoginRequest, RegisterRequest, UserResponse } from '../../../types/api-types';
 
 @Injectable({
   providedIn: 'root'
@@ -34,14 +21,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  public login(credentials: LoginType): Observable<User> {
+  public login(credentials: LoginRequest): Observable<UserResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, credentials).pipe(
       tap((res) => this.setSession(res.token)),
       switchMap(() => this.userService.me())
     );
   }
 
-  public register(credentials: RegisterType): Observable<User> {
+  public register(credentials: RegisterRequest): Observable<UserResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, credentials).pipe(
       tap((res) => this.setSession(res.token)),
       switchMap(() => this.userService.me())

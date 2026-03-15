@@ -4,7 +4,7 @@ import { NgIcon } from '@ng-icons/core';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
 import { CategoriesForm } from '../category-form/category-form';
 import { CategoryService } from '../../core/services/category.service';
-import { Category } from '../../core/models/finance.model';
+import { CategoryResponse } from '../../../types/api-types';
 
 @Component({
   selector: 'app-categories',
@@ -18,8 +18,13 @@ export class CategoriesComponent implements OnInit {
   private drawer = inject(SideDrawerService);
   private categoryService = inject(CategoryService);
 
-  public categories: Category[] = [];
-  private cd = inject(ChangeDetectorRef)
+  public categories: CategoryResponse[] = [];
+  private cd = inject(ChangeDetectorRef);
+
+  page = 0;
+  size = 10;
+  totalPages = 0;
+  totalElements = 0;
 
   ngOnInit(): void {
     this.getAllItens();
@@ -36,18 +41,20 @@ export class CategoriesComponent implements OnInit {
 
     this.categoryService.getAll().subscribe({
       next: (categories) => {
-        this.categories = categories;
+        this.categories = categories.data;
+        this.totalPages = categories.totalPages;
+        this.totalElements = categories.total
         this.cd.detectChanges();
       }
     });
 
   }
 
-  public deleteCategory(category: Category) {
+  public deleteCategory(category: CategoryResponse) {
     this.categoryService.delete(category.id).subscribe(() => this.getAllItens())
   }
 
-  public btnEdit(category: Category) {
+  public btnEdit(category: CategoryResponse) {
      this.drawer.open(CategoriesForm, {
       title: 'Editar categoria',
       data: category,
@@ -55,4 +62,24 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+
+  nextPage() {
+
+    if (this.page + 1 >= this.totalPages){
+     return
+    };
+
+    this.page++;
+    this.getAllItens();
+
+  }
+
+  previousPage() {
+    if (this.page === 0){ 
+      return;
+    }
+    this.page--;
+    this.getAllItens();
+
+  }
 }

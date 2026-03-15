@@ -44,9 +44,7 @@
           </tr>
 
           <!-- Accounts -->
-          <tr
-            *ngFor="let account of accounts"
-            class="hover:bg-slate-700/40 transition-colors">
+          <tr *ngFor="let account of accounts" class="hover:bg-slate-700/40 transition-colors">
 
             <!-- Nome + descrição -->
             <td class="px-6 py-4">
@@ -57,11 +55,9 @@
                   {{ account.name }}
                 </span>
 
-                <span
-                  *ngIf="account.descriptor"
-                  class="text-xs text-slate-400">
+                <span *ngIf="account.desc" class="text-xs text-slate-400">
 
-                  {{ account.descriptor }}
+                  {{ account.desc }}
 
                 </span>
 
@@ -70,9 +66,7 @@
             </td>
 
             <!-- Saldo -->
-            <td
-              class="px-6 py-4 font-semibold"
-              [ngClass]="{
+            <td class="px-6 py-4 font-semibold" [ngClass]="{
                 'text-emerald-400': account.balance >= 0,
                 'text-red-400': account.balance < 0
               }">
@@ -86,17 +80,13 @@
 
               <div class="flex justify-end gap-3">
 
-                <button
-                  class="text-slate-400 hover:text-white transition-colors"
-                  (click)="editAccount(account)">
+                <button class="text-slate-400 hover:text-white transition-colors" (click)="editAccount(account)">
 
                   <ng-icon name="tablerEdit" class="w-5 h-5"></ng-icon>
 
                 </button>
 
-                <button
-                  class="text-slate-400 hover:text-red-400 transition-colors"
-                  (click)="deleteAccount(account)">
+                <button class="text-slate-400 hover:text-red-400 transition-colors" (click)="deleteAccount(account)">
 
                   <ng-icon name="tablerTrash" class="w-5 h-5"></ng-icon>
 
@@ -111,6 +101,36 @@
         </tbody>
 
       </table>
+
+      <div class="flex items-center justify-between p-4 border-t border-slate-700">
+
+        <span class="text-sm text-slate-400">
+          {{ totalElements || 0 }} registros
+        </span>
+
+        <div class="flex items-center gap-3">
+
+          <button (click)="previousPage()" [disabled]="page === 0"
+            class="px-3 py-1 bg-slate-700 rounded hover:bg-slate-600 disabled:opacity-40">
+
+            Anterior
+
+          </button>
+
+          <span class="text-sm text-slate-300">
+            Página {{ page + 1 }} / {{ totalPages }}
+          </span>
+
+          <button (click)="nextPage()" [disabled]="page + 1 >= totalPages"
+            class="px-3 py-1 bg-slate-700 rounded hover:bg-slate-600 disabled:opacity-40">
+
+            Próxima
+
+          </button>
+
+        </div>
+
+      </div>
     </div>
 
   </div>

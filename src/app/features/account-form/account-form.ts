@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
-import { Account, AccountService } from '../../core/services/account.service';
+import { AccountService } from '../../core/services/account.service';
+import { AccountRequest } from '../../../types/api-types';
 
 @Component({
   selector: 'app-account-form',
@@ -46,7 +47,7 @@ export class AccountForm implements OnInit {
       return;
     }
 
-    const data: Partial<Account> = this.form.getRawValue();
+    const data: Partial<AccountRequest> = this.form.getRawValue();
 
     if (this.id) {
       this.update(data);
@@ -57,7 +58,7 @@ export class AccountForm implements OnInit {
 
   }
 
-  private create(data: Partial<Account>) {
+  private create(data: Partial<AccountRequest>) {
 
     this.accountService.create(data).subscribe({
       next: () => {
@@ -68,7 +69,7 @@ export class AccountForm implements OnInit {
 
   }
 
-  private update(data: Partial<Account>) {
+  private update(data: Partial<AccountRequest>) {
 
     this.accountService.update(this.id!, data).subscribe({
       next: () => {

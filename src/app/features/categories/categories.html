@@ -85,6 +85,35 @@
         </tbody>
 
       </table>
+       <div class="flex items-center justify-between p-4 border-t border-slate-700">
+
+        <span class="text-sm text-slate-400">
+          {{ totalElements || 0 }} registros
+        </span>
+
+        <div class="flex items-center gap-3">
+
+          <button (click)="previousPage()" [disabled]="page === 0"
+            class="px-3 py-1 bg-slate-700 rounded hover:bg-slate-600 disabled:opacity-40">
+
+            Anterior
+
+          </button>
+
+          <span class="text-sm text-slate-300">
+            Página {{ page + 1 }} / {{ totalPages }}
+          </span>
+
+          <button (click)="nextPage()" [disabled]="page + 1 >= totalPages"
+            class="px-3 py-1 bg-slate-700 rounded hover:bg-slate-600 disabled:opacity-40">
+
+            Próxima
+
+          </button>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
