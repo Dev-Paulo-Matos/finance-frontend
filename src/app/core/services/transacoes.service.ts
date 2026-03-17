@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { TransactionResponse } from '../../../types/api-types';
@@ -11,9 +11,10 @@ export class TransactionService {
 
   constructor(private http: HttpClient) { }
 
-  public getAll(): Observable<PageResponse<TransactionResponse>> {
+  public getAll(params?: HttpParams): Observable<PageResponse<TransactionResponse>> {
     return this.http.get<PageResponse<TransactionResponse>>(this.baseUrl, {
-      responseType: "json"
+      responseType: "json",
+      params: params
     });
   }
 

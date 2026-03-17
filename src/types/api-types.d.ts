@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-03-14 21:32:52.
+// Generated using typescript-generator version 3.2.1263 on 2026-03-16 21:30:01.
 
 export interface AccountFilter {
     name: string;

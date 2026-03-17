@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -20,6 +20,10 @@ export class AccountService {
 
     return this.http.get<PageResponse<AccountResponse>>(this.baseUrl, { params });
 
+  }
+
+  public getMountAll(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/mount/all`)
   }
 
   public create(account: Partial<AccountResponse>): Observable<AccountResponse> {

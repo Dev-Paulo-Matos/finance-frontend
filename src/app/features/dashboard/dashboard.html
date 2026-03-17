@@ -12,7 +12,7 @@
       </div>
 
       <p id="total-balance" class="text-2xl font-bold text-emerald-400">
-        R$ 0,00
+        {{ mountAll | currency: 'BRL'}}
       </p>
     </div>
 
@@ -53,10 +53,57 @@
       <h3 class="font-semibold">Últimas Transações</h3>
     </div>
 
-    <div id="recent-transactions" class="p-6">
-      <p class="text-slate-500 text-center py-8">
-        Nenhuma transação registrada
-      </p>
-    </div>
+    <table class="w-full">
+
+        <thead class="bg-slate-700/50">
+          <tr>
+            <th class="text-left px-6 py-4 text-sm text-slate-400">Categoria</th>
+            <th class="text-left px-6 py-4 text-sm text-slate-400">Conta</th>
+            <th class="text-left px-6 py-4 text-sm text-slate-400">Data</th>
+            <th class="text-left px-6 py-4 text-sm text-slate-400">Valor</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-slate-700">
+
+          <tr *ngIf="transactions.length === 0">
+            <td colspan="6" class="px-6 py-10 text-center text-slate-500">
+              Nenhuma transação encontrada
+            </td>
+          </tr>
+
+          <tr *ngFor="let transaction of transactions">
+            <!-- Categoria -->
+            <td class="px-6 py-4">
+              {{ transaction.category.name }}
+            </td>
+
+            <!-- Conta -->
+            <td class="px-6 py-4">
+              {{ transaction.account.name }}
+            </td>
+
+            <!-- Data -->
+            <td class="px-6 py-4">
+              {{ transaction.date | date:'dd/MM/yyyy' }}
+            </td>
+
+            <!-- Valor -->
+            <td
+              class="px-6 py-4 font-semibold"
+              [ngClass]="{
+                'text-emerald-400': transaction.type === 'INCOME',
+                'text-red-400': transaction.type === 'EXPENSE'
+              }">
+
+              {{ transaction.amount | currency:'BRL'}}
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
   </div>
 </div>
