@@ -1,0 +1,148 @@
+<div class="min-h-screen w-full bg-slate-950 text-white flex flex-col">
+
+  <!-- Hero -->
+  <header class="w-full border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-full bg-emerald-500/20 flex items-center justify-center">
+          <ng-icon name="tablerWallet" class="w-6 h-6 text-emerald-400"></ng-icon>
+        </div>
+        <span class="font-semibold tracking-tight">Finanças</span>
+      </div>
+
+      <button
+        type="button"
+        (click)="navigateToApp()"
+        class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-sm font-medium"
+      >
+        Entrar / Criar conta
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <section class="max-w-5xl mx-auto px-4 py-12 grid gap-10 md:grid-cols-2 items-center">
+      <div>
+        <p class="text-emerald-400 text-xs font-semibold mb-3 uppercase tracking-[0.2em]">
+          Controle financeiro simples e poderoso
+        </p>
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+          Organize suas contas, categorias e transações em um só lugar.
+        </h1>
+        <p class="text-slate-300 text-sm md:text-base mb-6">
+          Acompanhe saldos, entradas e saídas, veja para onde o seu dinheiro está indo e planeje o futuro
+          com clareza. Tudo isso em uma interface moderna, pensada para o dia a dia.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 mb-4">
+          <button
+            type="button"
+            (click)="navigateToApp()"
+            class="px-5 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-sm font-semibold"
+          >
+            Começar teste grátis
+          </button>
+          <span class="text-xs text-slate-400">
+            Sem cartão de crédito. Experimente as principais funcionalidades por tempo limitado.
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 text-xs text-slate-300">
+          <div class="flex items-start gap-2">
+            <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+            <p>Cadastro de contas, categorias e transações com poucos cliques.</p>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+            <p>Visão consolidada de saldo e fluxo de caixa.</p>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+            <p>Categorização de despesas e receitas para entender seus gastos.</p>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="mt-[2px] h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+            <p>Interface responsiva, pensada para o uso diário.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 shadow-2xl shadow-black/40">
+        <p class="text-xs text-emerald-300 font-medium mb-3">
+          Visão geral do que você pode fazer
+        </p>
+        <div class="space-y-4 text-xs text-slate-200">
+          <div class="rounded-xl bg-slate-900 border border-slate-800 px-4 py-3">
+            <p class="font-semibold mb-1">Dashboard</p>
+            <p class="text-slate-400">
+              Acompanhe rapidamente o saldo das suas contas e as últimas movimentações.
+            </p>
+          </div>
+          <div class="rounded-xl bg-slate-900 border border-slate-800 px-4 py-3">
+            <p class="font-semibold mb-1">Contas</p>
+            <p class="text-slate-400">
+              Cadastre contas bancárias, carteiras digitais ou qualquer outra fonte de saldo.
+            </p>
+          </div>
+          <div class="rounded-xl bg-slate-900 border border-slate-800 px-4 py-3">
+            <p class="font-semibold mb-1">Categorias</p>
+            <p class="text-slate-400">
+              Crie categorias de despesas e receitas para entender melhor seus hábitos financeiros.
+            </p>
+          </div>
+          <div class="rounded-xl bg-slate-900 border border-slate-800 px-4 py-3">
+            <p class="font-semibold mb-1">Transações</p>
+            <p class="text-slate-400">
+              Registre entradas e saídas, vincule às contas e categorias e mantenha tudo organizado.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-t border-slate-800 bg-slate-950/60">
+      <div class="max-w-5xl mx-auto px-4 py-10">
+        <h2 class="text-lg font-semibold mb-4">Planos</h2>
+        <div class="grid gap-4 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+            <p class="text-sm font-semibold mb-1">Plano Free</p>
+            <p class="text-xs text-slate-400 mb-3">
+              Ideal para começar a organizar suas finanças pessoais.
+            </p>
+            <ul class="text-xs text-slate-300 space-y-1.5">
+              <li>- Cadastro básico de contas, categorias e transações.</li>
+              <li>- Acesso ao dashboard padrão.</li>
+              <li>- Limite adequado para uso individual.</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-emerald-500/60 bg-emerald-500/5 p-5">
+            <p class="text-sm font-semibold mb-1">Plano Premium (em breve)</p>
+            <p class="text-xs text-slate-300 mb-3">
+              Para quem precisa de relatórios avançados e mais recursos de planejamento.
+            </p>
+            <ul class="text-xs text-slate-200 space-y-1.5">
+              <li>- Relatórios detalhados e filtros avançados.</li>
+              <li>- Mais limites de cadastros e recursos extras.</li>
+              <li>- Prioridade em melhorias e novidades.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-900">
+    <div class="max-w-5xl mx-auto px-4 py-4 text-[11px] text-slate-500 flex items-center justify-between">
+      <span>© {{ currentYear }} Finanças. Todos os direitos reservados.</span>
+      <button
+        type="button"
+        (click)="navigateToApp()"
+        class="text-emerald-400 hover:text-emerald-300"
+      >
+        Acessar aplicação
+      </button>
+    </div>
+  </footer>
+
+</div>
+
