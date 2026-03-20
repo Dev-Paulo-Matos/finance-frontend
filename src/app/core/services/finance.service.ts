@@ -1,6 +1,6 @@
 // finance.service.ts
 import { Injectable, signal } from '@angular/core';
-import { AccountResponse, TransactionResponse, TransactionType } from '../../../types/api-types';
+import { AccountResponse, TransactionResponse, TransactionType } from '@api-types';
 
 @Injectable({ providedIn: 'root' })
 export class FinanceService {

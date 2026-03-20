@@ -7,12 +7,13 @@ import { AccountService } from '../../core/services/account.service';
 import { CategoryService } from '../../core/services/category.service';
 
 import { SideDrawerService } from '../../core/services/side-drawer.service';
-import { AccountResponse, CategoryResponse, TransactionResponse } from '../../../types/api-types';
+import { AccountResponse, CategoryResponse, TransactionResponse } from '@api-types';
+import { FormFieldErrorComponent } from '../../shared/form-field-error/form-field-error.component';
 
 @Component({
   selector: 'app-transaction-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormFieldErrorComponent],
   templateUrl: './transaction-form.html',
   styleUrl: './transaction-form.scss'
 })

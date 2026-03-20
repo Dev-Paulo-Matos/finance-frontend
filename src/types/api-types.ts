@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-03-16 21:30:01.
+// Generated using typescript-generator version 3.2.1263 on 2026-03-19 21:50:05.
 
 export interface AccountFilter {
     name: string;
@@ -68,6 +68,29 @@ export interface CategoryResponse {
     spendValue: number;
 }
 
+export interface CategorySumDTO {
+    categoryName: string;
+    totalAmount: number;
+}
+
+export interface DashboardChartsResponse {
+    incomesByDate: DateSumDTO[];
+    expensesByDate: DateSumDTO[];
+    incomesByCategory: CategorySumDTO[];
+    expensesByCategory: CategorySumDTO[];
+}
+
+export interface DashboardSummaryResponse {
+    totalIncome: number;
+    totalExpense: number;
+    totalBalance: number;
+}
+
+export interface DateSumDTO {
+    date: DateAsString;
+    totalAmount: number;
+}
+
 export interface TransactionFilter {
     description: string;
     type: TransactionType;
@@ -108,6 +131,12 @@ export interface UserResponse {
 }
 
 export interface UserResponseBuilder {
+}
+
+export interface UserUpdateRequest {
+    name: string;
+    phone: string;
+    password: string;
 }
 
 export interface PageResponse<T> {

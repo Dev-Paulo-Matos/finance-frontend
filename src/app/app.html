@@ -1,4 +1,4 @@
-<div id="app" class="h-full w-full flex overflow-hidden">
+<div id="app" class="h-full w-full flex overflow-x-hidden overflow-y-auto">
   <app-loader></app-loader>
   <ng-container *ngIf="isAppReady$ | async; else authLayout">
 
@@ -24,3 +24,4 @@
 
 </div>
 <app-side-drawer></app-side-drawer>
+<app-toast-container></app-toast-container>

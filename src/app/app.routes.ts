@@ -1,11 +1,19 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { GuestGuard } from './core/guards/guest.guard';
+import { LandingComponent } from './features/landing/landing.component';
+import { NotFoundRedirectGuard } from './core/guards/not-found-redirect.guard';
 
 export const routes: Routes = [
 
   {
     path: '',
+    canActivate: [GuestGuard],
+    component: LandingComponent
+  },
+
+  {
+    path: 'app',
     canActivateChild: [AuthGuard],
     children: [
 
@@ -42,6 +50,22 @@ export const routes: Routes = [
       },
 
       {
+        path: 'profile',
+        loadComponent: () =>
+          import('./features/profile/profile')
+            .then(m => m.ProfileComponent),
+        data: { animation: 'profile' }
+      },
+
+      {
+        path: 'reports',
+        loadComponent: () =>
+          import('./features/reports/reports')
+            .then(m => m.ReportsComponent),
+        data: { animation: 'reports' }
+      },
+
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
@@ -60,7 +84,8 @@ export const routes: Routes = [
 
   {
     path: '**',
-    redirectTo: 'dashboard'
+    canActivate: [NotFoundRedirectGuard],
+    component: LandingComponent
   }
 
 ];

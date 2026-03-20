@@ -8,6 +8,7 @@
       <input
         formControlName="description"
         class="w-full mt-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:border-emerald-500">
+      <app-form-field-error [control]="form.get('description')"></app-form-field-error>
     </div>
 
     <!-- valor -->
@@ -17,6 +18,7 @@
         type="number"
         formControlName="amount"
         class="w-full mt-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg">
+      <app-form-field-error [control]="form.get('amount')"></app-form-field-error>
     </div>
 
     <!-- data -->
@@ -26,6 +28,7 @@
         type="date"
         formControlName="date"
         class="w-full mt-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg">
+      <app-form-field-error [control]="form.get('date')"></app-form-field-error>
     </div>
 
     <!-- tipo -->
@@ -40,6 +43,7 @@
         <option value="INCOME">Receita</option>
 
       </select>
+      <app-form-field-error [control]="form.get('type')"></app-form-field-error>
     </div>
 
     <!-- conta -->
@@ -55,6 +59,7 @@
         </option>
 
       </select>
+      <app-form-field-error [control]="form.get('accountId')"></app-form-field-error>
     </div>
 
     <!-- categoria -->
@@ -70,6 +75,7 @@
         </option>
 
       </select>
+      <app-form-field-error [control]="form.get('categoryId')"></app-form-field-error>
     </div>
 
     <!-- botões -->

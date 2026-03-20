@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
-import { AuthResponse, LoginRequest, RegisterRequest, UserResponse } from '../../../types/api-types';
+import { AuthResponse, LoginRequest, RegisterRequest, UserResponse } from '@api-types';
 
 @Injectable({
   providedIn: 'root'

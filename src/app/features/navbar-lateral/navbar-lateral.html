@@ -12,7 +12,7 @@
       <!-- Dashboard -->
       <li>
         <button
-          routerLink="/dashboard"
+          routerLink="/app/dashboard"
           routerLinkActive="bg-emerald-500/20 text-emerald-400"
           [routerLinkActiveOptions]="{ exact: true }"
           class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all text-slate-400 hover:bg-slate-700 hover:text-white">
@@ -25,7 +25,7 @@
       <!-- Contas -->
       <li>
         <button
-          routerLink="/accounts"
+          routerLink="/app/accounts"
           routerLinkActive="bg-emerald-500/20 text-emerald-400"
           class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all text-slate-400 hover:bg-slate-700 hover:text-white">
 
@@ -37,7 +37,7 @@
       <!-- Categorias -->
       <li>
         <button
-          routerLink="/categories"
+          routerLink="/app/categories"
           routerLinkActive="bg-emerald-500/20 text-emerald-400"
           class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all text-slate-400 hover:bg-slate-700 hover:text-white">
 
@@ -49,12 +49,24 @@
       <!-- Transações -->
       <li>
         <button
-          routerLink="/transactions"
+          routerLink="/app/transactions"
           routerLinkActive="bg-emerald-500/20 text-emerald-400"
           class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all text-slate-400 hover:bg-slate-700 hover:text-white">
 
           <ng-icon name="tablerReceipt" class="w-5 h-5"></ng-icon>
           <span>Transações</span>
+        </button>
+      </li>
+
+      <!-- Relatórios -->
+      <li>
+        <button
+          routerLink="/app/reports"
+          routerLinkActive="bg-emerald-500/20 text-emerald-400"
+          class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all text-slate-400 hover:bg-slate-700 hover:text-white">
+
+          <ng-icon name="tablerReportAnalytics" class="w-5 h-5"></ng-icon>
+          <span>Relatórios</span>
         </button>
       </li>
 

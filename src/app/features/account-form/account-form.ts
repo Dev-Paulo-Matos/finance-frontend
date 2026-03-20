@@ -3,12 +3,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
 import { AccountService } from '../../core/services/account.service';
-import { AccountRequest } from '../../../types/api-types';
+import { AccountRequest } from '@api-types';
+import { FormFieldErrorComponent } from '../../shared/form-field-error/form-field-error.component';
 
 @Component({
   selector: 'app-account-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormFieldErrorComponent],
   templateUrl: './account-form.html'
 })
 export class AccountForm implements OnInit {

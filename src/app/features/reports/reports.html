@@ -1,0 +1,112 @@
+<div class="max-w-5xl mx-auto h-full p-2">
+  <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-white mb-2">Relatórios</h1>
+      <p class="text-slate-400">Exporte seus dados em CSV ou Excel.</p>
+    </div>
+
+    <div class="flex items-center gap-3 bg-slate-800 p-3 rounded-xl border border-slate-700">
+      <div class="flex items-center gap-2">
+        <label class="text-xs text-slate-400 font-medium px-2 uppercase tracking-wider">Período de</label>
+        <input type="date" [(ngModel)]="startDate"
+          class="bg-slate-900 border-none rounded-lg px-3 py-1.5 text-sm text-white focus:ring-1 focus:ring-emerald-500 font-sans cursor-pointer">
+      </div>
+      <div class="flex items-center gap-2 border-l border-slate-700 pl-2">
+        <label class="text-xs text-slate-400 font-medium px-2 uppercase tracking-wider">Até</label>
+        <input type="date" [(ngModel)]="endDate"
+          class="bg-slate-900 border-none rounded-lg px-3 py-1.5 text-sm text-white focus:ring-1 focus:ring-emerald-500 font-sans cursor-pointer">
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    <!-- Contas Report Card -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+      <div>
+        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+          <ng-icon name="tablerBuildingBank" class="w-6 h-6 text-blue-400"></ng-icon>
+        </div>
+        <h3 class="text-lg font-semibold text-slate-100 mb-2">Acompanhamento de Contas</h3>
+        <p class="text-sm text-slate-400 mb-6">Seus limites, descrições e histórico de saldo resumidos por todas as contas.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <button 
+          (click)="downloadAccounts()" 
+          [disabled]="downloading"
+          class="flex items-center justify-center gap-2 w-full py-2 bg-slate-700 hover:bg-slate-600 text-slate-100 rounded-lg transition-colors font-medium border border-slate-600 text-sm"
+        >
+          <ng-icon name="tablerDownload"></ng-icon>
+          <span>CSV</span>
+        </button>
+        <button 
+          (click)="downloadAccountsExcel()" 
+          [disabled]="downloading"
+          class="flex items-center justify-center gap-2 w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 rounded-lg transition-colors font-medium border border-emerald-500/30 text-sm"
+        >
+          <ng-icon name="tablerFileSpreadsheet"></ng-icon>
+          <span>Excel</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Categorias Report Card -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+      <div>
+        <div class="w-12 h-12 bg-fuchsia-500/20 rounded-lg flex items-center justify-center mb-4">
+          <ng-icon name="tablerTags" class="w-6 h-6 text-fuchsia-400"></ng-icon>
+        </div>
+        <h3 class="text-lg font-semibold text-slate-100 mb-2">Relação de Categorias</h3>
+        <p class="text-sm text-slate-400 mb-6">Exportação do registro analítico das suas categorias configuradas e tipos de lançamento.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <button 
+          (click)="downloadCategories()" 
+          [disabled]="downloading"
+          class="flex items-center justify-center gap-2 w-full py-2 bg-slate-700 hover:bg-slate-600 text-slate-100 rounded-lg transition-colors font-medium border border-slate-600 text-sm"
+        >
+          <ng-icon name="tablerDownload"></ng-icon>
+          <span>CSV</span>
+        </button>
+        <button 
+          (click)="downloadCategoriesExcel()" 
+          [disabled]="downloading"
+          class="flex items-center justify-center gap-2 w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 rounded-lg transition-colors font-medium border border-emerald-500/30 text-sm"
+        >
+          <ng-icon name="tablerFileSpreadsheet"></ng-icon>
+          <span>Excel</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Transacoes Report Card -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 flex flex-col justify-between">
+      <div>
+        <div class="w-12 h-12 bg-emerald-500/20 rounded-lg flex items-center justify-center mb-4">
+          <ng-icon name="tablerReceipt" class="w-6 h-6 text-emerald-400"></ng-icon>
+        </div>
+        <h3 class="text-lg font-semibold text-slate-100 mb-2">Extrato de Transações</h3>
+        <p class="text-sm text-slate-400 mb-6">Todo histórico transacional categorizado com valores, perfis e contas.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <button 
+          (click)="downloadTransactions()" 
+          [disabled]="downloading"
+          class="flex items-center justify-center gap-2 w-full py-2 bg-slate-700 hover:bg-slate-600 text-slate-100 rounded-lg transition-colors font-medium border border-slate-600 text-sm"
+        >
+          <ng-icon name="tablerDownload"></ng-icon>
+          <span>CSV</span>
+        </button>
+        <button 
+          (click)="downloadTransactionsExcel()" 
+          [disabled]="downloading"
+          class="flex items-center justify-center gap-2 w-full py-2 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 rounded-lg transition-colors font-medium border border-emerald-500/30 text-sm"
+        >
+          <ng-icon name="tablerFileSpreadsheet"></ng-icon>
+          <span>Excel</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

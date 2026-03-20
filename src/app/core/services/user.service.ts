@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { UserResponse } from '../../../types/api-types';
+import { UserResponse, UserUpdateRequest } from '@api-types';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,12 @@ export class UserService {
 
   public me(): Observable<UserResponse> {
     return this.http.get<UserResponse>(`${this.baseUrl}/me`).pipe(
+      tap((user) => this.setUser(user))
+    );
+  }
+
+  public updateUser(data: UserUpdateRequest): Observable<UserResponse> {
+    return this.http.put<UserResponse>(`${this.baseUrl}/me`, data).pipe(
       tap((user) => this.setUser(user))
     );
   }

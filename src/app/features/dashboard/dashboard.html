@@ -12,7 +12,7 @@
       </div>
 
       <p id="total-balance" class="text-2xl font-bold text-emerald-400">
-        {{ mountAll | currency: 'BRL'}}
+        {{ totalBalance | currency: 'BRL'}}
       </p>
     </div>
 
@@ -27,7 +27,7 @@
       </div>
 
       <p id="total-income" class="text-2xl font-bold text-blue-400">
-        R$ 0,00
+        {{ totalIncome | currency: 'BRL' }}
       </p>
     </div>
 
@@ -42,8 +42,41 @@
       </div>
 
       <p id="total-expenses" class="text-2xl font-bold text-red-400">
-        R$ 0,00
+        {{ totalExpense | currency: 'BRL' }}
       </p>
+    </div>
+
+  </div>
+
+  <!-- Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    
+    <!-- Timeline: Receitas vs Despesas -->
+    <div class="bg-slate-800 rounded-xl border border-slate-700 lg:col-span-2 p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-slate-200">Fluxo de Caixa</h3>
+      </div>
+      <div class="h-64 w-full">
+        <canvas baseChart
+                [data]="timelineChartData"
+                [options]="timelineChartOptions"
+                [type]="'line'">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Despesas por Categoria -->
+    <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-semibold text-slate-200">Despesas por Categoria</h3>
+      </div>
+      <div class="h-64 w-full flex-1 relative">
+        <canvas baseChart
+                [data]="expenseCategoryChartData"
+                [options]="categoryChartOptions"
+                [type]="'doughnut'">
+        </canvas>
+      </div>
     </div>
 
   </div>

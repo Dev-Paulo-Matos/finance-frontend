@@ -7,11 +7,12 @@ import { AuthService } from './core/services/auth.service';
 import { UserService } from './core/services/user.service';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { SideDrawerComponent } from './shared/drawer/side-drawer.component';
+import { ToastContainerComponent } from './shared/toast/toast-container.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarHeader, NavbarLateral, LoaderComponent, SideDrawerComponent],
+  imports: [CommonModule, RouterOutlet, NavbarHeader, NavbarLateral, LoaderComponent, SideDrawerComponent, ToastContainerComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './app.html'
 })

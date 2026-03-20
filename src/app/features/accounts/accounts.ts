@@ -4,12 +4,13 @@ import { NgIcon } from '@ng-icons/core';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
 import { AccountForm } from '../account-form/account-form';
 import { AccountService } from '../../core/services/account.service';
-import { AccountResponse } from '../../../types/api-types';
+import { AccountFilter, AccountResponse } from '@api-types';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-accounts',
   standalone: true,
-  imports: [CommonModule, NgIcon],
+  imports: [CommonModule, NgIcon, FormsModule],
   templateUrl: './accounts.html',
   styleUrl: './accounts.scss',
 })
@@ -27,6 +28,11 @@ export class Accounts implements OnInit {
   totalPages = 0;
   totalElements = 0;
 
+  filter: Partial<AccountFilter> & { balanceStatus?: 'POSITIVE' | 'NEGATIVE' | 'ALL' } = {
+    name: '',
+    balanceStatus: 'ALL'
+  };
+
   ngOnInit(): void {
     this.getAllAccounts();
   }
@@ -39,21 +45,35 @@ export class Accounts implements OnInit {
   }
 
   getAllAccounts() {
+    const params: Partial<AccountFilter> = { name: this.filter.name };
+    
+    if (this.filter.balanceStatus === 'POSITIVE') {
+      params.minBalance = 0.01;
+    } else if (this.filter.balanceStatus === 'NEGATIVE') {
+      params.maxBalance = -0.01;
+    }
 
-    this.accountService.getAll(this.page, this.size).subscribe({
-
+    this.accountService.getAll(this.page, this.size, params).subscribe({
       next: (response) => {
-        console.log(response)
         this.accounts = response.data;
         this.totalPages = response.totalPages;
         this.totalElements = response.total;
-
         this.cd.detectChanges();
-
       }
-
     });
+  }
 
+  applyFilter() {
+    this.page = 0;
+    this.getAllAccounts();
+  }
+
+  clearFilter() {
+    this.filter = {
+      name: '',
+      balanceStatus: 'ALL'
+    };
+    this.applyFilter();
   }
 
   editAccount(account: AccountResponse) {

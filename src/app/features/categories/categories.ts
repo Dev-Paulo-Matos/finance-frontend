@@ -4,12 +4,13 @@ import { NgIcon } from '@ng-icons/core';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
 import { CategoriesForm } from '../category-form/category-form';
 import { CategoryService } from '../../core/services/category.service';
-import { CategoryResponse } from '../../../types/api-types';
+import { CategoriesFilter, CategoryResponse, TransactionType } from '@api-types';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [CommonModule, NgIcon],
+  imports: [CommonModule, NgIcon, FormsModule],
   templateUrl: './categories.html',
   styleUrl: './categories.scss',
 })
@@ -26,6 +27,13 @@ export class CategoriesComponent implements OnInit {
   totalPages = 0;
   totalElements = 0;
 
+  filter: Partial<CategoriesFilter> = {
+    name: '',
+    transactionType: undefined
+  };
+
+  transactionTypes = Object.values(TransactionType);
+
   ngOnInit(): void {
     this.getAllItens();
   }
@@ -39,7 +47,7 @@ export class CategoriesComponent implements OnInit {
 
   public getAllItens() {
 
-    this.categoryService.getAll().subscribe({
+    this.categoryService.getAll(this.page, this.size, this.filter).subscribe({
       next: (categories) => {
         this.categories = categories.data;
         this.totalPages = categories.totalPages;
@@ -48,6 +56,19 @@ export class CategoriesComponent implements OnInit {
       }
     });
 
+  }
+
+  applyFilter() {
+    this.page = 0;
+    this.getAllItens();
+  }
+
+  clearFilter() {
+    this.filter = {
+      name: '',
+      transactionType: undefined
+    };
+    this.applyFilter();
   }
 
   public deleteCategory(category: CategoryResponse) {

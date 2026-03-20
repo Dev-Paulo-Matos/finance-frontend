@@ -3,12 +3,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SideDrawerService } from '../../core/services/side-drawer.service';
 import { CategoryService } from '../../core/services/category.service';
-import { CategoryRequest, TransactionType } from '../../../types/api-types';
+import { CategoryRequest, TransactionType } from '@api-types';
+import { FormFieldErrorComponent } from '../../shared/form-field-error/form-field-error.component';
 
 @Component({
   selector: 'app-category-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormFieldErrorComponent],
   templateUrl: './category-form.html'
 })
 export class CategoriesForm implements OnInit {
