@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
-    apiUrl: 'http://localhost:8080/api' 
+  production: false,
+  apiUrl: 'https://financeapi-production-b009.up.railway.app/api'
 };
