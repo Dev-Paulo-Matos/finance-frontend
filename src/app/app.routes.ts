@@ -84,8 +84,7 @@ export const routes: Routes = [
 
   {
     path: '**',
-    canActivate: [NotFoundRedirectGuard],
-    component: LandingComponent
+    redirectTo: '/app/dashboard'
   }
 
 ];

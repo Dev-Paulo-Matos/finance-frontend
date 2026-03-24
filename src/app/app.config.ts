@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
+import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { provideHttpClient, withInterceptors } from '@angular/common/http'; // Importe estes caras
 
@@ -15,14 +15,14 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(
       routes,
-      withPreloading(PreloadAllModules)
+      withPreloading(PreloadAllModules),
+      withHashLocation()
     ),
     
-    // Adicionamos o Cliente HTTP com a lista de interceptors
     provideHttpClient(
       withInterceptors([
-        LoadingInterceptor, // 1º Liga o loading
-        AuthInterceptor     // 2º Adiciona o Token "Bearer ..."
+        LoadingInterceptor, 
+        AuthInterceptor
       ])
     ),
      provideIcons({
