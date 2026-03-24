@@ -20,29 +20,29 @@ A aplicação foi desenvolvida com foco em **performance, escalabilidade e exper
 
 ## 🖼️ Preview
 
-
-
 ### Landing Page
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/landing_page_plans_1774007688160.png
+![Landing Page](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/landing_page_plans_1774007688160.png)
 
 ### Dashboard
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/dashboard_and_charts_1774008320338.webp
+![Dashboard](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/dashboard_and_charts_1774008320338.webp)
 
 ### Login
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/landing_and_register_1774007499172.webp
+![Login](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/landing_and_register_1774007499172.webp)
 
 ### Cadastro
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/creating_accounts_1774007779936.webp
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/creating_categories_1774007957846.webp
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/creating_transactions_1774008127660.webp
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/creating_accounts_1774007779936.webp
+
+![Criando Contas](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/creating_accounts_1774007779936.webp)
+
+![Criando Categorias](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/creating_categories_1774007957846.webp)
+
+![Criando Transações](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/creating_transactions_1774008127660.webp)
 
 ### Relatórios
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/reports_csv_export_1774008430546.webp
+![Relatórios](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/reports_csv_export_1774008430546.webp)
 
+### Lista de Categorias
+![Categorias](https://raw.githubusercontent.com/Dev-Paulo-Matos/finance-frontend/master/public/categories_list_final_1774008086102.png)
 
-### Categoria List
-https://github.com/Dev-Paulo-Matos/finance-frontend/blob/master/public/categories_list_final_1774008086102.png
 ---
 
 ## 🧱 Arquitetura
